@@ -50,6 +50,8 @@ class Transfer extends Component {
       start: 1,
       limit: 10,
       search: "",
+      selectedOption: "",
+      selectedOptionTo: "",
     };
   }
 
@@ -147,6 +149,18 @@ class Transfer extends Component {
       },
     });
   }
+
+  handleChangeRadio = (event) => {
+    this.setState({
+      selectedOption: event
+    });
+  };
+
+  handleChangeRadioTo = (event) => {
+    this.setState({
+      selectedOptionTo: event
+    });
+  };
 
   handleSearch(event) {
     this.setState({
@@ -435,8 +449,10 @@ class Transfer extends Component {
                                         return (
                                           <Fragment key={index}>
                                             <tr
-                                              onClick={(e) =>
+                                              onClick={(e) =>{
                                                 this.onClickRow(at)
+                                                this.handleChangeRadio(at.login)
+                                                }
                                               }
                                               className={
                                                 this.state.selected.login ===
@@ -448,9 +464,11 @@ class Transfer extends Component {
                                               <td>
                                                 <input
                                                   type="radio"
-                                                  onChange={(e) =>
+                                                    onChange={(e) =>{
                                                     this.onClickRow(at)
+                                                    }
                                                   }
+                                                  checked={this.state.selectedOption === at.login}
                                                   name="account-selection"
                                                   value={at.login}
                                                 />
@@ -550,8 +568,10 @@ class Transfer extends Component {
                                             return (
                                               <Fragment key={index}>
                                                 <tr
-                                                  onClick={(e) =>
+                                                  onClick={(e) =>{
                                                     this.onClickRow2(at)
+                                                    this.handleChangeRadioTo(at.login)
+                                                    }
                                                   }
                                                   className={
                                                     this.state.selected
@@ -566,7 +586,7 @@ class Transfer extends Component {
                                                       onChange={(e) =>
                                                         this.onClickRow2(at)
                                                       }
-                                                      
+                                                      checked={this.state.selectedOptionTo === at.login}
                                                       name="account-selection2"
                                                       value={at.login}
                                                     />
