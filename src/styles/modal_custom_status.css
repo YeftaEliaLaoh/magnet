@@ -1,0 +1,13 @@
+@media only screen and (min-width: 360px) and (max-width: 568px){
+    .rs-modal-dialog {
+        margin-left: 5%;
+        margin-right: 6%;
+    }
+}
+
+@media only screen and (min-width: 400px) and (max-width: 568px){
+    .rs-modal-dialog {
+        margin-left: 5%;
+        margin-right: 6%;
+    }
+}

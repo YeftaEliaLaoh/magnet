@@ -1,0 +1,67 @@
+{
+  "name": "magnet",
+  "version": "1.0.0",
+  "homepage": "https://devs.andtechnology.me/magnet",
+  "private": true,
+  "dependencies": {
+    "@ashvin27/react-datatable": "^1.5.3",
+    "@headlessui/react": "^1.5.0",
+    "@reduxjs/toolkit": "^1.6.1",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
+    "@types/react-transition-group": "^4.4.3",
+    "axios": "^0.21.4",
+    "bootstrap": "^4.6.0",
+    "compress.js": "^1.2.2",
+    "crypto-js": "^4.1.1",
+    "formik": "^2.2.9",
+    "jquery": "^3.6.0",
+    "less": "^3.11.1",
+    "less-loader": "^6.0.0",
+    "moment": "^2.29.1",
+    "react": "^17.0.2",
+    "react-bootstrap": "^1.6.3",
+    "react-bootstrap-sweetalert": "^5.2.0",
+    "react-datetime": "^3.1.1",
+    "react-dom": "^17.0.2",
+    "react-google-recaptcha": "^2.1.0",
+    "react-icons": "^4.4.0",
+    "react-number-format": "^4.7.3",
+    "react-redux": "^7.2.5",
+    "react-router-dom": "^5.3.0",
+    "react-scripts": "^4.0.3",
+    "react-select": "^4.3.1",
+    "react-select-async-paginate": "^0.5.3",
+    "rsuite": "5.16.0",
+    "web-vitals": "^1.1.2",
+    "yup": "^0.32.9"
+  },
+  "scripts": {
+    "prestart": "tailwindcss -i ./src/index.tailwinds.css -c ./tailwind.config.js -o ./src/styles/index.css",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.2",
+    "postcss": "^8.4.5",
+    "tailwindcss": "^3.0.12"
+  }
+}

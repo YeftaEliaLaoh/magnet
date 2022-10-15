@@ -1,0 +1,16 @@
+.rs-navbar.rs-navbar-inverse .rs-dropdown .rs-dropdown-menu-active ~ .rs-dropdown-toggle, .rs-navbar.rs-navbar-inverse .rs-dropdown .rs-dropdown-toggle, .rs-navbar.rs-navbar-inverse .rs-nav-item-active > .rs-nav-item-content, .rs-navbar.rs-navbar-inverse .rs-nav-item > .rs-nav-item-content, .rs-navbar.rs-navbar-inverse .rs-dropdown .rs-dropdown-menu-active ~ .rs-dropdown-toggle:hover, .rs-navbar.rs-navbar-inverse .rs-dropdown .rs-dropdown-toggle:hover, .rs-navbar.rs-navbar-inverse .rs-nav-item-active > .rs-nav-item-content:hover, .rs-navbar.rs-navbar-inverse .rs-nav-item > .rs-nav-item-content:hover, .rs-navbar.rs-navbar-inverse .rs-dropdown .rs-dropdown-menu-active ~ .rs-dropdown-toggle:focus, .rs-navbar.rs-navbar-inverse .rs-dropdown .rs-dropdown-toggle:focus, .rs-navbar.rs-navbar-inverse .rs-nav-item-active > .rs-nav-item-content:focus, .rs-navbar.rs-navbar-inverse .rs-nav-item > .rs-nav-item-content:focus, .rs-navbar.rs-navbar-inverse .rs-dropdown .rs-dropdown-menu-active ~ .rs-dropdown-toggle:active, .rs-navbar.rs-navbar-inverse .rs-dropdown .rs-dropdown-toggle:active, .rs-navbar.rs-navbar-inverse .rs-nav-item-active > .rs-nav-item-content:active, .rs-navbar.rs-navbar-inverse .rs-nav-item > .rs-nav-item-content:active {
+    color: #000;font-weight: bold;
+  }
+
+ 
+ .rs-nav-subtle.rs-nav-horizontal .rs-nav-item > .rs-nav-item-content::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    right: 50%;
+    height: 2px;
+    background-color: #fff;
+    -webkit-transition: left 0.3s ease-out, right 0.3s ease-out;
+    transition: left 0.3s ease-out, right 0.3s ease-out;
+}
