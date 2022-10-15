@@ -42,3 +42,14 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+
+ # 1. magnet-front.rar copy ke public/css/
+ # 2. replace index.tailwind.css yg di src/index.tailwind.css
+ # 3. index.html di public folder ditambahkan 
+	<link rel="stylesheet" href="%PUBLIC_URL%/css/bootstrap/dist/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="%PUBLIC_URL%/css/rsuite/dist/rsuite.min.css"/>
+ # 4. jalanin "npm run prestart" 
+ # 5. jalanin "npm start"
+ # 6. tambahkan REACT_APP_URL_API=https://dev.magnetfx.co.id/api di root folder, folder .env 
+ # 7. running ulang lagi appsnya
