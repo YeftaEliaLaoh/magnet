@@ -2374,25 +2374,13 @@ if (visible.length > 0) {
                                 <Form.Control
                                   name="pendapatan_pertahun"
                                   size="lg"
-                                  value={
-                                    dataKekayaan.pendapatan_pertahun
-                                      ? dataKekayaan.pendapatan_pertahun
-                                      : ""
-                                  }
-                                  onChange={this.handleChangeKekayaan.bind(
-                                    this
-                                  )}
-                                  as="select"
-                                >
-                                  <option value="">Pendapatan Per Tahun</option>
-                                  {
-                                    this.props.dataRejDocument[0]?.data_field[0]?.option.map((el,key)=>(
-                                      <option value={el.value} key={"pendapatan-pertahun-"+key}>
-                                    {el.text}
-                                  </option>
-                                    ))
-                                  }
-                                
+                                  value={dataKekayaan.pendapatan_pertahun ? dataKekayaan.pendapatan_pertahun : ''}
+                                  onChange={this.handleChangeKekayaan.bind(this)}
+                                  as="select">
+                                  <option value="">-</option>
+                                  <option value="Antara 100-250 juta">Antara 100-250 juta</option>
+                                  <option value="Antara 250-500 juta">Antara 250-500 juta</option>
+                                  <option value="Di atas 500 juta">Di atas 500 juta</option>
                                 </Form.Control>
                                 {errMsg3.pendapatan_pertahun ? (
                                   <span className="text-error badge badge-danger">
