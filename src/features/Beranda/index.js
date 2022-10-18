@@ -554,8 +554,7 @@ class Beranda extends Component {
 
 
                     </div>
-
-                    {akun_trading_demo.length <= 10 &&(
+                    {akun_trading_demo.length < 10 &&(
 
                     <div className="grid grid-col2-1 place-items-center mb-4 pl-5 pr-5">
                       <div className="w-auto bg-hijau-forex rounded-xl text-white pt-2 pb-2 grid grid-cols-1 place-items-center static" style={{ backgroundColor: "#C2252C" }}>
@@ -743,8 +742,7 @@ class Beranda extends Component {
                     : ""}
                 </div>
 
-               {akun_trading_demo.length <= 10 && (
-
+               {akun_trading_demo.length >= 10 && (
                 <div className="grid grid-col2-1 place-items-center mb-4 pl-5 pr-5">
                   <div className="w-auto bg-hijau-forex rounded-xl text-white pt-2 pb-2 pb-20 grid grid-cols-1 place-items-center static" style={{ backgroundColor: "#C2252C" }}>
                     <a href="account-type" className="btn btn-lgreen btn-sm">
