@@ -1188,7 +1188,7 @@ if (visible.length > 0) {
                                                 user.photo_ktp || ktpTemp
                                               }
 											
-                                              onClick={()=> {window.open('/popup','_blank','height=600,width=400');}}
+                                              onClick={()=> {window.open('/popup','_blank');}}
                                             >
                                               <img
                                                 src={see_icon}
@@ -2377,7 +2377,7 @@ if (visible.length > 0) {
                                   value={dataKekayaan.pendapatan_pertahun ? dataKekayaan.pendapatan_pertahun : ''}
                                   onChange={this.handleChangeKekayaan.bind(this)}
                                   as="select">
-                                  <option value="">-</option>
+                                  <option value=""></option>
                                   <option value="Antara 100-250 juta">Antara 100-250 juta</option>
                                   <option value="Antara 250-500 juta">Antara 250-500 juta</option>
                                   <option value="Di atas 500 juta">Di atas 500 juta</option>
