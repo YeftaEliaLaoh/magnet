@@ -1188,7 +1188,7 @@ if (visible.length > 0) {
                                                 user.photo_ktp || ktpTemp
                                               }
 											
-                        onClick={()=> {window.open(user.photo_ktp || ktpTemp,'_blank');return false;}}
+                                              onClick={()=> {window.open('/popup','_blank','height=600,width=400');}}
                                             >
                                               <img
                                                 src={see_icon}

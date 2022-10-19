@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Login, Main, PageLoading, Register, Forgot,Reset } from './Template';
+import { Login, Main, PageLoading, Register, Forgot, Reset, PopUp } from './Template';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ProtectedRoute from './router/ProtectedRoute';
@@ -51,6 +51,9 @@ function App({ main }) {
             <Reset />
           </PublicRoute>
 
+          <ProtectedRoute exact path="/popup">
+            <PopUp />
+          </ProtectedRoute>
 
           <ProtectedRoute path="/">
             <Main>
