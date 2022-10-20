@@ -477,6 +477,16 @@ class Personal extends Component {
     return valid;
   }
 
+  windowOpen(path) {
+    let location = window.location.href;
+    let BaseName = location.substring(location.lastIndexOf("/") + 1);
+
+    location = location.replace(BaseName,path);
+    console.log(location)
+
+    window.open(location,'_blank');
+  }
+
   handleSubmit1 = async (action) => {
     var errors = this.state.errMsg1;
 
@@ -1187,8 +1197,7 @@ if (visible.length > 0) {
                                               href={
                                                 user.photo_ktp || ktpTemp
                                               }
-											
-                                              onClick={()=> {window.open('/popup','_blank');}}
+                                              onClick={()=> this.windowOpen("popup")}
                                             >
                                               <img
                                                 src={see_icon}
@@ -3782,7 +3791,7 @@ if (visible.length > 0) {
                                     <Form>
                                       <Form.Group controlId="PHOTO">
                                         <Form.File
-                                          style={{ width: 118 }}
+                                          style={{ width: 101, height: 50 }}
                                           className="custom-file-input2"
                                           size="lg"
                                           name="PHOTO"
@@ -3813,7 +3822,7 @@ if (visible.length > 0) {
                                         <Form.File
                                           className="custom-file-input2"
                                           size="lg"
-                                          style={{ width: 118 }}
+                                          style={{ width: 101, height: 45 }}
                                           name="OTHER"
                                           setfieldvalue=""
                                           onChange={this.handleChangePhoto.bind(
