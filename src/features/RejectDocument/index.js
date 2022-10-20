@@ -597,7 +597,18 @@ class RejectDocument extends Component {
                                                   </option>
                                                 </Fragment>
                                               )}
-
+                                              {df.option &&
+                                                df.field === "pendapatan_pertahun"
+                                                ? df.option.map(function (
+                                                    pp
+                                                  ) {
+                                                    return (
+                                                      <option
+                                                        value={pp.value}> {pp.text}
+                                                      </option>
+                                                    );
+                                                  })
+                                                : ""}
                                               {df.option &&
                                               (df.field === "tempat_lahir" ||
                                                 df.field === "provinsi")

@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { Container, Content } from 'rsuite'
-import { MyHeader, MySidebar } from '../Template';
 import { connect } from 'react-redux';
-import { onLogout, fetchUserBytoken, profileUser } from '../features/main/mainSlice'
-import { Redirect } from 'react-router';
+import {  fetchUserBytoken } from '../features/main/mainSlice'
 import photo_ktp from "../assets/ktp-01.png";
 
 const tokenLogin = process.env.REACT_APP_TOKEN_LOGIN;
@@ -28,10 +26,10 @@ class PopUp extends Component {
                     <Container>
                         <Container style={{marginTop:"5px"}}>
                         <img style={{maxWidth:"100%"}}
-                            src={
-                                this.props.user.photo_ktp_download ? this.props.user.photo_ktp_download : (user.photo_ktp ? user.photo_ktp: photo_ktp)
-                            }
-                        />
+                                        src={
+                                          this.props.user.photo_ktp ? this.props.user.photo_ktp : (user.photo_ktp ? user.photo_ktp: photo_ktp)
+                                        }
+                                      />
                         </Container>
 
                     </Container>
@@ -43,7 +41,6 @@ class PopUp extends Component {
 const mapDispatchToPros = (dispatch) => {
     return {
         onLoad: () => {
-          dispatch(profileUser());
           dispatch(fetchUserBytoken());
         }
     }
