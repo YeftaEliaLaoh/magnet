@@ -132,6 +132,35 @@ class Pernyataan extends Component {
       
     }
 
+    handleSubmitAll(action) {
+        var errors = this.state.errMsg1;
+		console.log(this.props.dataPernyataan.pernyataan1);
+        errors.pernyataan1 = this.props.dataPernyataan.pernyataan1 !== 'Y' ? "Pilihan ini harus disetujui" : '';
+        errors.pernyataan2 = this.props.dataPernyataan.pernyataan2 !== 'Y' ? "Pilihan ini harus disetujui" : '';
+        errors.pernyataan3 = this.props.dataPernyataan.pernyataan3 !== 'Y' ? "Pilihan ini harus disetujui" : '';
+        errors.badan_abritase = this.props.dataPernyataan.badan_abritase === '' || this.props.dataPernyataan.badan_abritase === null ? "Silakan Pilih Pilihan Resolusi Konflik" : '';
+        
+
+        this.setState({ errors });
+        if (!this.validateForm(this.state.errMsg1)) {
+      
+            if (errors.pernyataan1 !== '') {
+                this.setState({ defaultActiveKey: 1 },()=>{setTimeout(()=>{this.scrollDiv.current?.scrollIntoView(false);},500)});
+            } else if(errors.pernyataan2 !== '') {
+                this.setState({ defaultActiveKey: 2 },()=>{setTimeout(()=>{this.scrollDiv.current?.scrollIntoView(false);},500)});
+            } else if(errors.pernyataan3 !== '') {
+                this.setState({ defaultActiveKey: 3 },()=>{setTimeout(()=>{this.scrollDiv.current?.scrollIntoView(false);},500)});
+            } else {
+                this.setState({ defaultActiveKey: 3 },()=>{setTimeout(()=>{this.scrollDiv.current?.scrollIntoView(false);},500)});
+            }
+
+        } else {
+            this.props.onSave(this.props.dataPernyataan);
+            if (action) this.props.history.push(action);
+        }
+      
+    }
+
     handleSelect(evt) {
         console.log(evt)
         this.setState({ defaultActiveKey: evt })
@@ -162,7 +191,12 @@ class Pernyataan extends Component {
                                     lastSegmentUrl === "personal" ? "active default flex-1 p-3" : "default flex-1 p-3"
                                 }
                             >
-                                <a href="personal">1. Informasi Pribadi</a>
+                                 <a href="#"
+                                onClick={this.handleSubmitAll.bind(
+                                    this,
+                                    '/personal'
+                                )}
+                                > 1. Informasi Pribadi</a>
                             </li>
                             <li
                                 className={
@@ -171,9 +205,12 @@ class Pernyataan extends Component {
                                         : "default flex-1 p-3"
                                 }
                             >
-                                <a href="account-type">
-                                    2. Tipe Akun
-                                </a>
+                                <a href="#"
+                                onClick={this.handleSubmitAll.bind(
+                                    this,
+                                    '/account-type'
+                                )}
+                                > 2. Tipe Akun</a>
                             </li>
                             <li
                                 className={
@@ -193,9 +230,12 @@ class Pernyataan extends Component {
                                         : "default flex-1 p-3"
                                 }
                             >
-                                <a href="trading_rules">
-                                    4. Peraturan Trading
-                                </a>
+                                <a href="#"
+                                onClick={this.handleSubmitAll.bind(
+                                    this,
+                                    '/trading_rules'
+                                )}
+                                > 4. Peraturan Trading</a>
                             </li>
                             <li
                                 className={
@@ -204,9 +244,12 @@ class Pernyataan extends Component {
                                         : "default flex-1 p-3"
                                 }
                             >
-                                <a href="company_profile">
-                                    5. Profil Perusahaan
-                                </a>
+                                <a href="#"
+                                onClick={this.handleSubmitAll.bind(
+                                    this,
+                                    '/company_profile'
+                                )}
+                                >5. Profil Perusahaan</a>
                             </li>
                         </ul>
                     </div>
@@ -469,7 +512,7 @@ class Pernyataan extends Component {
 
                                                 </Panel>
 
-                                                <Panel eventKey={3} expanded={true} className="w-accordion__header__title shadow-lg px-2 py-1 my-2 mx-2" header="3. Perjanjian Pemberian Amanat secara Elektronik On-line untuk Transaksi Kontrak Derivatif dalam Sistem Perdagangan Alternatif">
+                                                <Panel eventKey={3} expanded={true} className="w-accordion__header__title label_hitam shadow-lg px-2 py-1 my-2 mx-2" header="3. Perjanjian Pemberian Amanat secara Elektronik On-line untuk Transaksi Kontrak Derivatif dalam Sistem Perdagangan Alternatif">
                                                     <br/>
                                                     <div className="form-group text-center">
                                                         <div className="alert alert-danger kolom_merah" style={{ background: '#C2252C',color:'#fff',borderRadius:'10px'}}>
@@ -529,13 +572,12 @@ class Pernyataan extends Component {
                                                             <p><b>Pelaksanaan Transaksi</b></p>
                                                             <p>(1) Setiap transaksi Nasabah dilaksanakan secara elektronik on-line oleh Nasabah yang bersangkutan; </p>
                                                             <p>(2) Setiap amanat Nasabah yang diterima dapat langsung dilaksanakan sepanjang nilai Margin yang tersedia pada rekeningnya mencukupi dan eksekusinya dapat menimbulkan perbedaan waktu terhadap proses pelaksanaan transaksi tersebut.Nasabah harus mengetahui posisi Margin dan posisi terbuka sebelum memberikan amanat untuk transaksi berikutnya.</p>
-                                                            <p>
-                                (3) Setiap transaksi Nasabah secara bilateral
-                                dilawankan dengan Penyelenggara Sistem
-                                Perdagangan Alternatif{" "}
-                                {legalitas_perusahaan.nama_penyelenggara} yang
-                                bekerjasama dengan Pialang Berjangka.
-                              </p>
+                                                            <p>(3) Setiap transaksi Nasabah secara bilateral
+                                                                dilawankan dengan Penyelenggara Sistem
+                                                                Perdagangan Alternatif{" "}
+                                                                {legalitas_perusahaan.nama_penyelenggara} yang
+                                                                bekerjasama dengan Pialang Berjangka.
+                                                            </p>
                                                         </li>
                                                         <li tabIndex={1}>
                                                             <p><b>Kewajiban Memelihara Margin</b></p>

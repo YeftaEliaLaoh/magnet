@@ -305,6 +305,43 @@ export const regUser = createAsyncThunk(
   }
 );
 
+export const addNewAkunDemo = createAsyncThunk(
+  "user/addNewAkunDemo",
+  async (param, thunkAPI) => {
+    const token = localStorage.getItem(tokenLogin)
+      ? "Bearer " + localStorage.getItem(tokenLogin)
+      : "";
+    var config = {
+      headers: {
+        "x-app-origin": "cabinet-app",
+        Authorization: token,
+      },
+    };
+    try {
+      const response = await axios.post(
+        API_URL + "/general-option/add-new-akun-demo",
+        param,
+        config
+      );
+      let data = "";
+      let _data = await response;
+      if (response.status === 200) {
+        data = _data.data;
+        if (data.error_message === 0) {
+          return thunkAPI.fulfillWithValue(data);
+        } else {
+          return thunkAPI.rejectWithValue(data);
+        }
+      } else {
+        return thunkAPI.rejectWithValue(_data);
+      }
+    } catch (e) {
+      console.log("Error", e.response.data);
+      thunkAPI.rejectWithValue(e.response.data);
+    }
+  }
+);
+
 export const changePass = createAsyncThunk(
   "user/changePass",
   async (param, thunkAPI) => {
@@ -770,6 +807,7 @@ const initialState = {
   dataCabang: [],
   dataMarketing: [],
   showFormSuccess: false,
+  showFormSuccessAccountDemo: false,
   myStatus: false,
   toVerify: false,
   accessTokenKu: "",
@@ -963,6 +1001,32 @@ export const mainSlice = createSlice({
     },
     [completeData.pending]: (state) => {
       state.dataMarketing = [];
+    },
+    [addNewAkunDemo.fulfilled]: (state, { payload }) => {
+      console.log('payload', payload);
+      state.isFetching = false;
+      state.isError = false;
+      state.contentMsg =
+        "<div style='font-size:20px; text-align:center;'><strong>Akun Demo Berhasil Ditambahkan</strong>, " +
+        payload.message +
+        "</div>";
+      state.showFormSuccessAccountDemo = true;
+      return state;
+    },
+    [addNewAkunDemo.rejected]: (state, { payload }) => {
+      state.isFetching = false;
+      state.isError = true;
+      state.tipeSWAL = "warning";
+      state.errorMessage = payload.message;
+      state.contentMsg =
+        "<div style='font-size:20px; text-align:center;'><strong>Failed</strong>, " +
+        payload.message +
+        "</div>";
+      state.showFormSuccessAccountDemo = true;
+      return state;
+    },
+    [addNewAkunDemo.pending]: (state) => {
+      state.errorMessage = "";
     },
     [changePass.fulfilled]: (state, { payload }) => {
       state.isFetching = false;

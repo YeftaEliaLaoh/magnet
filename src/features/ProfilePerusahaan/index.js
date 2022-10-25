@@ -75,6 +75,29 @@ class ProfilePerusahaan extends Component {
     }
   }
 
+  handleSubmitAll(evt) {
+    var errors = this.state.errMsg1;
+    errors.agree1 =
+      this.props.persetujuan.agree1 === "N" || !this.props.persetujuan.agree1
+        ? "Kolom ini harus diisi"
+        : "";
+    this.setState({ errors });
+    if (this.validateForm(this.state.errMsg1)) {
+      const qs = {
+        ...this.state,
+        ...this.props.persetujuan,
+        wakil_pialang_caller:
+          this.props.profile_perusahaan.wakil_pialang_caller,
+      };
+      console.log(qs);
+      this.props.onSave(qs);
+      this.props.history.push(evt);
+    } else {
+      console.error("Invalid Form");
+    }
+}
+
+
   handleCloseSwal() {
     sessionStorage.removeItem("data_tipe_akun_id");
     this.props.history.push("/");
@@ -105,7 +128,12 @@ class ProfilePerusahaan extends Component {
                     : "default flex-1 p-3"
                 }
               >
-                <a href="personal">1. Informasi Pribadi</a>
+                 <a href="#"
+                                onClick={this.handleSubmitAll.bind(
+                                    this,
+                                    '/personal'
+                                )}
+                                > 1. Informasi Pribadi</a>
               </li>
               <li
                 className={
@@ -114,7 +142,12 @@ class ProfilePerusahaan extends Component {
                     : "default flex-1 p-3"
                 }
               >
-                <a href="account-type">2. Tipe Akun</a>
+                <a href="#"
+                                onClick={this.handleSubmitAll.bind(
+                                    this,
+                                    '/account-type'
+                                )}
+                                > 2. Tipe Akun</a>
               </li>
               <li
                 className={
@@ -123,7 +156,12 @@ class ProfilePerusahaan extends Component {
                     : "default flex-1 p-3"
                 }
               >
-                <a href="decleration">3. Pernyataan</a>
+                <a href="#"
+                                onClick={this.handleSubmitAll.bind(
+                                    this,
+                                    "/decleratione"
+                                )}
+                                >3. Pernyataan</a>
               </li>
               <li
                 className={
@@ -132,7 +170,12 @@ class ProfilePerusahaan extends Component {
                     : "default flex-1 p-3"
                 }
               >
-                <a href="trading_rules">4. Peraturan Trading</a>
+                <a href="#"
+                  onClick={this.handleSubmitAll.bind(
+                    this,
+                    "/trading_rules"
+                  )}
+                 >4. Peraturan Trading</a>
               </li>
               <li
                 className={

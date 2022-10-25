@@ -487,6 +487,355 @@ class Personal extends Component {
     window.open(location,'_blank');
   }
 
+  handleSubmitAll = async (action) => {
+    var errors = this.state.errMsg1;
+
+    errors.nama_depan = !this.props.user.nama_depan ?
+        "Kolom ini harus diisi" :
+        "";
+
+    errors.kota_lahir = !this.props.user.kota_lahir ?
+        "Kolom ini harus diisi" :
+        "";
+    errors.tanggal_lahir = !this.props.user.tanggal_lahir ?
+        "Kolom ini harus diisi" :
+        "";
+    errors.jenis_identitas = !this.props.user.jenis_identitas ?
+        "Kolom ini harus diisi" :
+        "";
+    errors.no_identitas = !this.props.user.no_identitas ?
+        "Kolom ini harus diisi" :
+        "";
+    errors.npwp = !this.props.user.npwp ? "Kolom ini harus diisi" : "";
+    errors.jenis_kelamin = !this.props.user.jenis_kelamin ?
+        "Kolom ini harus diisi" :
+        "";
+    errors.status_pernikahan = !this.props.user.status_pernikahan ?
+        "Kolom ini harus diisi" :
+        "";
+    errors.nama_pasangan = !this.props.user.nama_pasangan &&
+        this.props.user.status_pernikahan === "Kawin" ?
+        "Kolom ini harus diisi" :
+        "";
+    errors.nama_ibu_kandung = !this.props.user.nama_ibu_kandung ?
+        "Kolom ini harus diisi" :
+        "";
+    errors.photo_ktp_download = !this.props.user.photo_ktp_download ?
+        (!this.props.user.photo_ktp ? "Kolom ini harus diisi" : "") :
+        "";
+    errors.alamat = !this.props.user.alamat ? "Kolom ini harus diisi" : "";
+    errors.rt = !this.props.user.rt ? "Kolom ini harus diisi" : "";
+    errors.rw = !this.props.user.rw ? "Kolom ini harus diisi" : "";
+    errors.provinsi = !this.props.user.provinsi ? "Kolom ini harus diisi" : "";
+    errors.warga_negara = !this.props.user.warga_negara ?
+        "Kolom ini harus diisi" :
+        "";
+    errors.telp = !this.props.user.telp ? "Kolom ini harus diisi" : "";
+    errors.handphone = !this.props.user.handphone ?
+        "Kolom ini harus diisi" :
+        "";
+    errors.status_kepemilikan = !this.props.user.status_kepemilikan ?
+        "Kolom ini harus diisi" :
+        "";
+    errors.agreement1 = !this.props.user.agreement1 || !this.props.user.no_identitas ?
+        "Kolom ini harus diisi" :
+        "";
+
+    errors.npwp =
+        this.props.user.npwp && this.props.user.npwp.length < 15 ?
+        "NPWP harus 15 digit" :
+        errors.npwp;
+    this.setState({
+        errors
+    });
+
+    if (this.validateForm(this.state.errMsg1)) {
+        const saveData = {
+            ...this.props.user,
+            data_pribadi_id: this.props.user.data_pribadi_id,
+            agree: "Y",
+        };
+
+        this.props.onSaveDataPribadi(saveData);
+
+        var errors = this.state.errMsg2;
+        errors.tujuan_pembukaan_rekening = !this.props.dataExpTrading.tujuan_pembukaan_rekening ?
+            "Kolom ini harus diisi" :
+            "";
+        errors.agreement2 = !this.props.dataExpTrading.agreement2 ?
+            "Kolom ini harus diisi" :
+            "";
+        errors.pertanyaan2 =
+            this.props.dataExpTrading.pertanyaan1 === "Y" &&
+            this.props.dataExpTrading.pertanyaan2 === "" ?
+            "Kolom ini harus diisi" :
+            "";
+        errors.pertanyaan4 =
+            this.props.dataExpTrading.pertanyaan4 === "Y" ? "maaf" : "";
+        errors.pertanyaan3 =
+            this.props.dataExpTrading.pertanyaan3 === "Y" ? "maaf" : "";
+        if (errors.pertanyaan4 || errors.pertanyaan3) {
+            alert(
+                "Maaf, berdasarkan peraturan anda tidak diperbolehkan membuka rekening pada perusahaan pialang berjangka"
+            );
+        }
+        errors.pertanyaan6 =
+            this.props.dataExpTrading.pertanyaan5 === "Y" &&
+            this.props.dataExpTrading.pertanyaan6 === "" ?
+            "Kolom ini harus diisi" :
+            "";
+        this.setState({
+            errors
+        });
+        if (this.validateForm(this.state.errMsg2)) {
+            const saveData = {
+                tujuan_pembukaan_rekening: this.props.dataExpTrading
+                    .tujuan_pembukaan_rekening ?
+                    this.props.dataExpTrading.tujuan_pembukaan_rekening :
+                    "",
+                pertanyaan1: this.props.dataExpTrading.pertanyaan1 ?
+                    this.props.dataExpTrading.pertanyaan1 :
+                    "N",
+                pertanyaan2: this.props.dataExpTrading.pertanyaan2 ?
+                    this.props.dataExpTrading.pertanyaan2 :
+                    "",
+                pertanyaan3: this.props.dataExpTrading.pertanyaan3 ?
+                    this.props.dataExpTrading.pertanyaan3 :
+                    "N",
+                pertanyaan4: this.props.dataExpTrading.pertanyaan4 ?
+                    this.props.dataExpTrading.pertanyaan4 :
+                    "N",
+                pertanyaan5: this.props.dataExpTrading.pertanyaan5 ?
+                    this.props.dataExpTrading.pertanyaan5 :
+                    "N",
+                pertanyaan6: this.props.dataExpTrading.pertanyaan6 ?
+                    this.props.dataExpTrading.pertanyaan6 :
+                    "",
+                pengalaman_trading_id: this.props.dataExpTrading.pengalaman_trading_id ?
+                    this.props.dataExpTrading.pengalaman_trading_id :
+                    "",
+                agree: "Y",
+            };
+            await this.props.onSaveDataTrading(saveData);
+            this.props.getDataTrading();
+            var errors = this.state.errMsg3;
+            errors.pendapatan_pertahun = !this.props.dataKekayaan.pendapatan_pertahun ?
+                "Kolom ini harus diisi" :
+                "";
+            errors.lokasi = !this.props.dataKekayaan.lokasi ?
+                "Kolom ini harus diisi" :
+                "";
+            errors.agreement3 = !this.props.dataKekayaan.agreement3 ?
+                "Kolom ini harus diisi" :
+                "";
+            errors.njop = !this.props.dataKekayaan.njop ? "Kolom ini harus diisi" : "";
+            errors.deposit_bank = !this.props.dataKekayaan.deposit_bank ?
+                "Kolom ini harus diisi" :
+                "";
+            var njop = parseInt(
+                this.props.dataKekayaan.njop ?
+                this.props.dataKekayaan.njop.replace(/,/g, "") :
+                0
+            );
+            var deposit_bank = parseInt(
+                this.props.dataKekayaan.deposit_bank ?
+                this.props.dataKekayaan.deposit_bank.replace(/,/g, "") :
+                0
+            );
+            errors.njop =
+                errors.njop === "" && njop < 100000000 ? "Min. 100.000.000" : errors.njop;
+
+            errors.deposit_bank =
+                errors.deposit_bank === "" && deposit_bank < 10000000 ?
+                "Min. 10.000.000" :
+                errors.deposit_bank;
+
+            this.setState({
+                errors
+            });
+            if (this.validateForm(this.state.errMsg3)) {
+                const saveData = {
+                    ...this.props.dataKekayaan,
+                    lainnya: parseInt(
+                        this.props.dataKekayaan.lainnya ?
+                        this.props.dataKekayaan.lainnya.replace(/,/g, "") :
+                        0
+                    ),
+                    njop: parseInt(
+                        this.props.dataKekayaan.njop ?
+                        this.props.dataKekayaan.njop.replace(/,/g, "") :
+                        0
+                    ),
+                    deposit_bank: parseInt(
+                        this.props.dataKekayaan.deposit_bank ?
+                        this.props.dataKekayaan.deposit_bank.replace(/,/g, "") :
+                        0
+                    ),
+                };
+                await this.props.onSaveDataKekayaan(saveData);
+                var errors = this.state.errMsg4;
+                var nama = this.props.user.nama_depan + " " + this.props.user.nama_belakang;
+                nama = nama.toString().toLowerCase();
+                errors.nama = !this.props.dataKontakDarurat.nama ? "Nama harus diisi" : "";
+                errors.alamat = !this.props.dataKontakDarurat.alamat ?
+                    "Alamat harus diisi" :
+                    "";
+                errors.kode_pos = !this.props.dataKontakDarurat.kode_pos ?
+                    "Kode Pos harus diisi" :
+                    "";
+                errors.handphone = !this.props.dataKontakDarurat.handphone ?
+                    "Handphone harus diisi" :
+                    "";
+                errors.hubungan = !this.props.dataKontakDarurat.hubungan ?
+                    "Hubungan harus diisi" :
+                    "";
+                errors.telp = !this.props.dataKontakDarurat.telp ? "Telp. harus diisi" : "";
+                errors.agreement4 = !this.props.dataKontakDarurat.agreement4 ?
+                    "Kolom ini harus diisi" :
+                    "";
+                if (errors.nama === "")
+                    errors.nama =
+                    this.props.dataKontakDarurat.nama === nama ?
+                    "Nama tidak boleh sama dengan informasi detail" :
+                    "";
+                if (errors.telp === "")
+                    errors.telp =
+                    this.props.dataKontakDarurat.telp === this.props.user.telp ?
+                    "Telp tidak boleh sama dengan informasi detail" :
+                    "";
+                this.setState({
+                    errors
+                });
+                if (this.validateForm(this.state.errMsg4)) {
+                    const saveData = {
+                        ...this.props.dataKontakDarurat,
+                        agree: "Y",
+                    };
+                    await this.props.onSaveKontakDarurat(saveData);
+                } else {
+                    this.scrollToError()
+                    console.error("Invalid Form");
+                }
+
+                var errors = this.state.errMsg5;
+                errors.status_pekerjaan = !this.props.dataPekerjaan.status_pekerjaan ?
+                    "Harus diisi" :
+                    "";
+                errors.nama_perusahaan = !this.props.dataPekerjaan.nama_perusahaan ?
+                    "Harus diisi" :
+                    "";
+                errors.jenis_bisnis = !this.props.dataPekerjaan.jenis_bisnis ?
+                    "Harus diisi" :
+                    "";
+                errors.jabatan = !this.props.dataPekerjaan.jabatan ? "Harus diisi" : "";
+                errors.lama_bekerja = !this.props.dataPekerjaan.lama_bekerja ?
+                    "Harus diisi" :
+                    "";
+                errors.alamat_kantor = !this.props.dataPekerjaan.alamat_kantor ?
+                    "Harus diisi" :
+                    "";
+                errors.telp_kantor = !this.props.dataPekerjaan.telp_kantor ?
+                    "Harus diisi" :
+                    "";
+                errors.agreement5 = !this.props.dataPekerjaan.agreement5 ?
+                    "Kolom ini harus diisi" :
+                    "";
+                this.setState({
+                    errors
+                });
+                if (this.validateForm(this.state.errMsg5)) {
+                    const saveData = {
+                        ...this.props.dataPekerjaan,
+                        agree: "Y",
+                    };
+                    await this.props.onSaveDataPekerjaan(saveData);
+                    var errors = this.state.errMsg6;
+                    var nama_pemilik =
+                        this.props.user.nama_depan + " " + this.props.user.nama_belakang;
+                    errors.nama_pemilik = !this.props.dataAkunBank.nama_pemilik && nama_pemilik === "" ?
+                        "Kolom ini harus diisi" :
+                        "";
+                    errors.bank = !this.props.dataAkunBank.bank_id ?
+                        "Kolom ini harus diisi" :
+                        "";
+                    // errors.cabang = !this.props.dataAkunBank.cabang
+                    // ? "Kolom ini harus diisi"
+                    // : "";
+                    errors.no_rek = !this.props.dataAkunBank.no_rek ?
+                        "Kolom ini harus diisi" :
+                        "";
+                    errors.jenis_akun_bank = !this.props.dataAkunBank.jenis_akun_bank ?
+                        "Kolom ini harus diisi" :
+                        "";
+                    errors.agreement6 = !this.props.dataAkunBank.agreement6 ||
+                        this.props.dataAkunBank.agreement6 !== "Y" ?
+                        "Kolom ini harus diisi" :
+                        "";
+                    this.setState({
+                        errors
+                    });
+                    if (this.validateForm(this.state.errMsg6)) {
+                        const saveData = {
+                            akun_bank_id: this.props.dataAkunBank.akun_bank_id ?
+                                this.props.dataAkunBank.akun_bank_id :
+                                "",
+                            jenis_akun_bank: this.props.dataAkunBank.jenis_akun_bank ?
+                                this.props.dataAkunBank.jenis_akun_bank :
+                                "",
+                            cabang: this.props.dataAkunBank.cabang ?
+                                this.props.dataAkunBank.cabang :
+                                "",
+                            no_rek: this.props.dataAkunBank.no_rek ?
+                                this.props.dataAkunBank.no_rek :
+                                "",
+                            bank: this.props.dataAkunBank.bank_id ?
+                                this.props.dataAkunBank.bank_id :
+                                "",
+                            nama_pemilik: this.props.user.nama_depan + " " + this.props.user.nama_belakang,
+                            agree: "Y",
+                            agreement6: "Y",
+                        };
+                        await this.props.onSaveAkunBank(saveData);
+                        errors.agree =
+                            this.props.dokumenPribadiPernyataan.agree !== "Y" ?
+                            "Pilihan harus disetujui" :
+                            "";
+                        this.setState({
+                            errors
+                        });
+                        if (this.validateForm(this.state.errMsg7)) {
+                            const saveData = {
+                                data_pribadi_pernyataan_id: this.props.dokumenPribadiPernyataan.data_pribadi_pernyataan_id,
+                                agree: "Y",
+                            };
+                            this.props.onSaveDPP(saveData);
+                            console.log(action)
+                            this.props.history.push(action);
+                        } else {
+                            this.scrollToError()
+                            console.error("Invalid Form");
+                        }
+                    } else {
+                        console.error("Invalid Form");
+                    }
+                } else {
+                    console.error("Invalid Form");
+                }
+            } else {
+                this.scrollToError()
+                console.error("Invalid Form");
+            }
+        } else {
+            this.scrollToError()
+            console.error("Invalid Form");
+        }
+    } else {
+        this.scrollToError()
+        console.error("Invalid Form");
+    }
+
+};
+
   handleSubmit1 = async (action) => {
     var errors = this.state.errMsg1;
 
@@ -946,7 +1295,12 @@ if (visible.length > 0) {
                       : "default flex-1 p-3"
                   }
                 >
-                  <a href="account-type">2. Tipe Akun</a>
+                  <a href="#"
+                  onClick={this.handleSubmitAll.bind(
+                    this,
+                    "/account-type"
+                  )}
+                 >2. Tipe Akun</a>
                 </li>
                 <li
                   className={
@@ -955,7 +1309,12 @@ if (visible.length > 0) {
                       : "default flex-1 p-3"
                   }
                 >
-                  <a href="decleration">3. Pernyataan</a>
+                  <a href="#"
+                  onClick={this.handleSubmitAll.bind(
+                    this,
+                    "/decleratione"
+                  )}
+                 >3. Pernyataan</a>
                 </li>
                 <li
                   className={
@@ -964,7 +1323,12 @@ if (visible.length > 0) {
                       : "default flex-1 p-3"
                   }
                 >
-                  <a href="trading_rules">4. Peraturan Trading</a>
+                  <a href="#"
+                  onClick={this.handleSubmitAll.bind(
+                    this,
+                    "/trading_rules"
+                  )}
+                 >4. Peraturan Trading</a>
                 </li>
                 <li
                   className={
@@ -973,7 +1337,12 @@ if (visible.length > 0) {
                       : "default flex-1 p-3"
                   }
                 >
-                  <a href="company_profile">5. Profil Perusahaan</a>
+                  <a href="#"
+                  onClick={this.handleSubmitAll.bind(
+                    this,
+                    "/company_profile"
+                  )}
+                 >5. Profil Perusahaan</a>
                 </li>
               </ul>
             </div>
@@ -2386,7 +2755,7 @@ if (visible.length > 0) {
                                   value={dataKekayaan.pendapatan_pertahun ? dataKekayaan.pendapatan_pertahun : ''}
                                   onChange={this.handleChangeKekayaan.bind(this)}
                                   as="select">
-                                  <option value=""></option>
+                                  <option value="Pendapatan Per Tahun"></option>
                                   <option value="Antara 100-250 juta">Antara 100-250 juta</option>
                                   <option value="Antara 250-500 juta">Antara 250-500 juta</option>
                                   <option value="Di atas 500 juta">Di atas 500 juta</option>

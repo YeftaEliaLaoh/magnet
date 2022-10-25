@@ -42,6 +42,18 @@ class KetentuanTrading extends Component {
         }
     }
 
+    handleSubmitAll(evt) {
+        var errors = this.state.errMsg;
+        errors.agree = this.props.dataKetentuanTrading.agree != 'Y' ? "Kolom ini harus diisi" : '';
+        this.setState({ errors });
+        if (this.validateForm(this.state.errMsg)) {
+            this.props.saveDataKT(this.props.dataKetentuanTrading);
+            this.props.history.push(evt);
+        } else {
+            console.error('Invalid Form')
+        }
+    }
+
     handleChange(evt) {
         const name = evt.target.name;
         var value = evt.target.value;
@@ -70,7 +82,12 @@ class KetentuanTrading extends Component {
                                     lastSegmentUrl === "personal" ? "active default flex-1 p-3" : "default flex-1 p-3"
                                 }
                             >
-                                <a href="personal">1. Informasi Pribadi</a>
+                                 <a href="#"
+                                onClick={this.handleSubmitAll.bind(
+                                    this,
+                                    '/personal'
+                                )}
+                                > 1. Informasi Pribadi</a>
                             </li>
                             <li
                                 className={
@@ -79,9 +96,12 @@ class KetentuanTrading extends Component {
                                         : "default flex-1 p-3"
                                 }
                             >
-                                <a href="account-type">
-                                    2. Tipe Akun
-                                </a>
+                                <a href="#"
+                                onClick={this.handleSubmitAll.bind(
+                                    this,
+                                    '/account-type'
+                                )}
+                                > 2. Tipe Akun</a>
                             </li>
                             <li
                                 className={
@@ -90,9 +110,12 @@ class KetentuanTrading extends Component {
                                         : "default flex-1 p-3"
                                 }
                             >
-                                <a href="decleration">
-                                    3. Pernyataan
-                                </a>
+                                <a href="#"
+                                onClick={this.handleSubmitAll.bind(
+                                    this,
+                                    "/decleratione"
+                                )}
+                                >3. Pernyataan</a>
                             </li>
                             <li
                                 className={
@@ -112,9 +135,12 @@ class KetentuanTrading extends Component {
                                         : "default flex-1 p-3"
                                 }
                             >
-                                <a href="company_profile">
-                                    5. Profil Perusahaan
-                                </a>
+                                 <a href="#"
+                                onClick={this.handleSubmitAll.bind(
+                                    this,
+                                    '/company_profile'
+                                )}
+                                >5. Profil Perusahaan</a>
                             </li>
                         </ul>
                     </div>

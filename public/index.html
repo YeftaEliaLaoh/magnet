@@ -236,5 +236,13 @@ xmlns:xlink="http://www.w3.org/1999/xlink">
       ></iframe
     ></noscript>
     <!-- End Google Tag Manager (noscript) -->
+    <script>
+      if(location.pathname === '/popup'){
+        var appBanners = document.getElementsByClassName('page-footer');
+        for (var i = 0; i < appBanners.length; i ++) {
+            appBanners[i].style.display = 'none';
+        }
+      }
+    </script>
   </body>
 </html>

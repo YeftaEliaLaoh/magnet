@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { getAkunTrading, getAkunTradingDemo } from "../Setoran/setoranSlice";
-import { profileUser, chgPass, chgPhonePass, clearState } from '../main/mainSlice';
+import { profileUser, chgPass, chgPhonePass, clearState, addNewAkunDemo } from '../main/mainSlice';
 import { getDataPP } from "../ProfilePerusahaan/ppSlice";
 import NumberFormat from "react-number-format";
 import akun_icon from "../../assets/akun_white.svg";
@@ -9,7 +9,6 @@ import { Link } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
 import AppModal from "../../components/modal/MyModal";
 import AppModalStatus from "../../components/modal/MyModalStatus";
-import AppModall from "../../components/modal/MyModall";
 import { Button, Form } from "react-bootstrap";
 import { AppSwalSuccess } from '../../components/modal/SwalSuccess';
 import provider_mt5 from '../../assets/mt5.png';
@@ -149,6 +148,23 @@ class Beranda extends Component {
     }
   };
 
+  handleSubmit4 = async () => {
+    var errors = this.state.errMsg;
+
+    this.setState({
+      ...this.state,
+      loadingForm: true,
+    });
+    this.setState({ errors });
+
+    const param = {
+      deposit: "10000",
+    };
+   // this.props.onChangePass(param);
+
+    this.props.onAddNewAkunDemo(param);
+  }
+
   handleSubmit3 = async () => {
     localStorage.removeItem("myStatusDokumen");
     this.setState({
@@ -191,11 +207,18 @@ class Beranda extends Component {
     });
   }
 
+  editRecord(record) {
+    this.setState({
+      createAcc: true,
+    });
+  }
+
   handleClose() {
     localStorage.removeItem("myStatusDokumen");
     this.setState({
       showFormResPass: false,
       showFormResPhonePass: false,
+      createAcc: false,
       myStatusDokumen: false,
       selected: this.initSelected,
       errMsg: this.initSelected,
@@ -210,6 +233,10 @@ class Beranda extends Component {
       errMsg: this.initSelected,
     });
     this.props.closeSwal();
+  }
+
+  handleCloseSwalAccountDemo() {
+    window.location.reload(); 
   }
   
   handleClose2() {
@@ -233,7 +260,32 @@ class Beranda extends Component {
   render() {
     const { akun_trading, akun_trading_demo, profile, profile_perusahaan } = this.props;
     const { selected, errMsg, myStatusDokumen, myStatusDokumen2 } = this.state;
-
+    const frmUser3 = (
+        <div className="row">
+            <div className="col-sm-12">
+                  <Form.Group controlId="group">
+                    <label>Group</label>
+                      <Form.Control
+                        value="demo\mbm-elastico"
+                        autoComplete="off"
+                        size="lg"
+                        name="group"
+                        type="text"
+                        required
+                      />
+                      <label>Amount</label>
+                      <Form.Control
+                        value="10,000"
+                        autoComplete="off"
+                        size="lg"
+                        name="amount"
+                        type="text"
+                        required
+                      />
+                    </Form.Group>
+            </div>
+          </div>
+    );
     const frmUser = (
       <Form id="myForm">
         <Form.Group controlId="password">
@@ -558,9 +610,12 @@ class Beranda extends Component {
 
                     <div className="grid grid-col2-1 place-items-center mb-4 pl-5 pr-5">
                       <div className="w-auto bg-hijau-forex rounded-xl text-white pt-2 pb-2 grid grid-cols-1 place-items-center static" style={{ backgroundColor: "#C2252C" }}>
-                        <a href="account-type" className="btn btn-lgreen btn-sm"><span className="font-bold text-white">BUAT AKUN DEMO</span></a>
+                        <a                         
+                        onClick={() => this.editRecord(akun_trading_demo)}
+                        className="btn btn-lgreen btn-sm">
+                          <span className="font-bold text-white">BUAT AKUN DEMO</span>
+                        </a>
                       </div>
-
                     </div>
                     )}
 
@@ -742,7 +797,7 @@ class Beranda extends Component {
                     : ""}
                 </div>
 
-               {akun_trading_demo.length >= 10 && (
+               {akun_trading_demo.length < 10 && (
                 <div className="grid grid-col2-1 place-items-center mb-4 pl-5 pr-5">
                   <div className="w-auto bg-hijau-forex rounded-xl text-white pt-2 pb-2 pb-20 grid grid-cols-1 place-items-center static" style={{ backgroundColor: "#C2252C" }}>
                     <a href="account-type" className="btn btn-lgreen btn-sm">
@@ -793,6 +848,23 @@ class Beranda extends Component {
           }
           formSubmit={this.handleSubmit2.bind(this)}
         />
+        <AppModal
+          size="xs"
+          show={this.state.createAcc}
+          form={frmUser3}
+          backdrop="static"
+          keyboard={false}
+          title={"BUAT AKUN DEMO"}
+          titleButton="Save change"
+          themeButton="success"
+          handleClose={this.handleClose.bind(this)}
+          isLoading={
+            this.props.isAddLoading
+              ? this.props.isAddLoading
+              : this.state.loadingForm
+          }
+          formSubmit={this.handleSubmit4.bind(this)}
+        />
         <AppModalStatus
           show={myStatusDokumen}
           size="xs"
@@ -825,6 +897,13 @@ class Beranda extends Component {
           handleClose={this.handleCloseSwal.bind(this)}
         >
         </AppSwalSuccess>) : ''}
+        {this.props.showFormSuccessAccountDemo ? (<AppSwalSuccess
+          show={this.props.showFormSuccessAccountDemo}
+          title={<div dangerouslySetInnerHTML={{ __html: this.props.contentMsg }} />}
+          type={this.props.tipeSWAL}
+          handleClose={this.handleCloseSwalAccountDemo.bind(this)}
+        >
+        </AppSwalSuccess>) : ''}
       </div>
 
 
@@ -836,6 +915,7 @@ const mapStateToProps = (state) => ({
   akun_trading_demo: state.setoran.akunTradingDemo || [],
   contentMsg: state.main.contentMsg,
   showFormSuccess: state.main.showFormSuccess,
+  showFormSuccessAccountDemo: state.main.showFormSuccessAccountDemo,
   user: state.main.currentUser,
   tipeSWAL: state.main.tipeSWAL,
   profile: state.main.dtProfileUser,
@@ -858,6 +938,9 @@ const mapDispatchToPros = (dispatch) => {
     },
     closeSwal: () => {
       dispatch(clearState());
+    },
+    onAddNewAkunDemo: (param) => {
+      dispatch(addNewAkunDemo(param));
     }
   }
 };
