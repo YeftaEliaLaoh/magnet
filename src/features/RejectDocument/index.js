@@ -452,7 +452,7 @@ class RejectDocument extends Component {
                                               placeholder={df.label_field}
                                             />
                                           )}
-                                          {dr.type_field === "date" && (
+                                          {df.field === "tanggal_lahir" && (
                                             <Datetime
                                               closeOnSelect={true}
                                               timeFormat={false}
@@ -605,6 +605,126 @@ class RejectDocument extends Component {
                                                     return (
                                                       <option
                                                         value={pp.value}> {pp.text}
+                                                      </option>
+                                                    );
+                                                  })
+                                                : ""}
+                                                {df.option &&
+                                                df.field === "hubungan"
+                                                ? df.option.map(function (
+                                                    h
+                                                  ) {
+                                                    return (
+                                                      <option
+                                                        value={h.value}> {h.text}
+                                                      </option>
+                                                    );
+                                                  })
+                                                : ""}
+                                                {df.option &&
+                                                df.field === "status_pekerjaan"
+                                                ? df.option.map(function (
+                                                    h
+                                                  ) {
+                                                    return (
+                                                      <option
+                                                        value={h.value}> {h.text}
+                                                      </option>
+                                                    );
+                                                  })
+                                                : ""}
+                                                {df.option &&
+                                                df.field === "lama_bekerja"
+                                                ? df.option.map(function (
+                                                    h
+                                                  ) {
+                                                    return (
+                                                      <option
+                                                        value={h.value}> {h.text}
+                                                      </option>
+                                                    );
+                                                  })
+                                                : ""}
+                                                {df.option &&
+                                                df.field === "pekerjaan_sebelumnya"
+                                                ? df.option.map(function (
+                                                    h
+                                                  ) {
+                                                    return (
+                                                      <option
+                                                        value={h.value}> {h.text}
+                                                      </option>
+                                                    );
+                                                  })
+                                                : ""}
+                                                {df.option &&
+                                                df.field === "jenis_akun_bank"
+                                                ? df.option.map(function (
+                                                    h
+                                                  ) {
+                                                    return (
+                                                      <option
+                                                        value={h.value}> {h.text}
+                                                      </option>
+                                                    );
+                                                  })
+                                                : ""}
+                                                {df.option &&
+                                                df.field === "nama_bank"
+                                                ? df.option.map(function (
+                                                    h
+                                                  ) {
+                                                    return (
+                                                      <option
+                                                        value={h.bank_id}> {h.nama_bank}
+                                                      </option>
+                                                    );
+                                                  })
+                                                : ""}
+                                                {df.option &&
+                                                df.field === "pertanyaan1"
+                                                ? df.option.map(function (
+                                                    h
+                                                  ) {
+                                                    return (
+                                                      <option
+                                                        value={h.value}> {h.text}
+                                                      </option>
+                                                    );
+                                                  })
+                                                : ""}
+                                                {df.option &&
+                                                df.field === "pertanyaan3"
+                                                ? df.option.map(function (
+                                                    h
+                                                  ) {
+                                                    return (
+                                                      <option
+                                                        value={h.value}> {h.text}
+                                                      </option>
+                                                    );
+                                                  })
+                                                : ""}
+                                                {df.option &&
+                                                df.field === "pertanyaan4"
+                                                ? df.option.map(function (
+                                                    h
+                                                  ) {
+                                                    return (
+                                                      <option
+                                                        value={h.value}> {h.text}
+                                                      </option>
+                                                    );
+                                                  })
+                                                : ""}
+                                                {df.option &&
+                                                df.field === "pertanyaan5"
+                                                ? df.option.map(function (
+                                                    h
+                                                  ) {
+                                                    return (
+                                                      <option
+                                                        value={h.value}> {h.text}
                                                       </option>
                                                     );
                                                   })

@@ -110,7 +110,7 @@ class TypeAccount extends Component {
                                         : "default flex-1 p-3"
                                 }
                             >
-                                <a href="trading_rules">
+                                <a href="#">
                                     4. Peraturan Trading
                                 </a>
                             </li>
@@ -121,7 +121,7 @@ class TypeAccount extends Component {
                                         : "default flex-1 p-3"
                                 }
                             >
-                                <a href="company_profile">
+                                <a href="#">
                                     5. Profil Perusahaan
                                 </a>
                             </li>
