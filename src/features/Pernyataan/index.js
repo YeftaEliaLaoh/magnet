@@ -58,9 +58,7 @@ class Pernyataan extends Component {
         if (name === "agree") {
             value = evt.target.checked ? 'Y' : 'N';
         }
-        console.log(name,value)
 		if(name === "pernyataan1" && value === "Y"){
-            console.log("asdas")
 			this.setState({ defaultActiveKey: 2 },()=>{setTimeout(()=>{this.scrollDiv.current.scrollIntoView(false);},500)	});
 					
 		}
@@ -77,6 +75,7 @@ class Pernyataan extends Component {
         if (!this.validateForm(this.state.errMsg1)) {
             this.scrollToError()
         } else {
+            console.log(errors)
 			this.setState({ defaultActiveKey: 4 },()=>{setTimeout(()=>{this.scrollDiv.current.scrollIntoView(false);},500)	});
         }
 		}
@@ -84,8 +83,16 @@ class Pernyataan extends Component {
         dt['key'] = name;
         dt['value'] = value;
 
-        console.log(evt.target.checked)
+        console.log(dt)
         this.props.changeProps(dt);
+
+        if(name==="agree"){
+            dt['key'] = "nama_depan";
+            dt['value'] = this.props.user.nama_depan;
+
+            console.log(dt)
+            this.props.changeProps(dt);
+        }
     }
 
     scrollToError = () => {
@@ -105,7 +112,6 @@ class Pernyataan extends Component {
 
     handlesubmit(action) {
         var errors = this.state.errMsg1;
-		console.log(this.props.dataPernyataan.pernyataan1);
         errors.pernyataan1 = this.props.dataPernyataan.pernyataan1 !== 'Y' ? "Pilihan ini harus disetujui" : '';
         errors.pernyataan2 = this.props.dataPernyataan.pernyataan2 !== 'Y' ? "Pilihan ini harus disetujui" : '';
         errors.pernyataan3 = this.props.dataPernyataan.pernyataan3 !== 'Y' ? "Pilihan ini harus disetujui" : '';
@@ -133,8 +139,13 @@ class Pernyataan extends Component {
     }
 
     handleSubmitAll(action) {
-        var errors = this.state.errMsg1;
-		console.log(this.props.dataPernyataan.pernyataan1);
+        var errors = {
+            pernyataan1: "",
+            pernyataan2: "",
+            pernyataan3: "",
+            badan_abritase: "",
+          };
+
         errors.pernyataan1 = this.props.dataPernyataan.pernyataan1 !== 'Y' ? "Pilihan ini harus disetujui" : '';
         errors.pernyataan2 = this.props.dataPernyataan.pernyataan2 !== 'Y' ? "Pilihan ini harus disetujui" : '';
         errors.pernyataan3 = this.props.dataPernyataan.pernyataan3 !== 'Y' ? "Pilihan ini harus disetujui" : '';
@@ -142,7 +153,7 @@ class Pernyataan extends Component {
         
 
         this.setState({ errors });
-        if (!this.validateForm(this.state.errMsg1)) {
+        if (!this.validateForm(errors)) {
       
             if (errors.pernyataan1 !== '') {
                 this.setState({ defaultActiveKey: 1 },()=>{setTimeout(()=>{this.scrollDiv.current?.scrollIntoView(false);},500)});
@@ -191,12 +202,7 @@ class Pernyataan extends Component {
                                     lastSegmentUrl === "personal" ? "active default flex-1 p-3" : "default flex-1 p-3"
                                 }
                             >
-                                 <a href="#"
-                                onClick={this.handleSubmitAll.bind(
-                                    this,
-                                    '/personal'
-                                )}
-                                > 1. Informasi Pribadi</a>
+                                 <a href="personal"> 1. Informasi Pribadi</a>
                             </li>
                             <li
                                 className={
@@ -205,12 +211,7 @@ class Pernyataan extends Component {
                                         : "default flex-1 p-3"
                                 }
                             >
-                                <a href="#"
-                                onClick={this.handleSubmitAll.bind(
-                                    this,
-                                    '/account-type'
-                                )}
-                                > 2. Tipe Akun</a>
+                                <a href="/account-type"> 2. Tipe Akun</a>
                             </li>
                             <li
                                 className={
@@ -244,12 +245,9 @@ class Pernyataan extends Component {
                                         : "default flex-1 p-3"
                                 }
                             >
-                                <a href="#"
-                                onClick={this.handleSubmitAll.bind(
-                                    this,
-                                    '/company_profile'
-                                )}
-                                >5. Profil Perusahaan</a>
+                                 <a href="#">
+                                    5. Profil Perusahaan
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -647,7 +645,7 @@ class Pernyataan extends Component {
                                                             <p><b>Pemberitahuan</b></p>
                                                             <p>(1) Semua komunikasi, uang, surat berharga, dan kekayaan lainnya harus dikirimkan langsung ke alamat Nasabah seperti tertera dalam rekeningnya atau alamat lain yang ditetapkan/diberitahukan secara tertulis oleh Nasabah.</p>
                                                             <p>(2) Semua uang harus disetor atau ditransfer langsung oleh Nasabah ke Rekening Terpisah <i>(Segregated Account)</i>Pialang Berjangka: </p>
-                                                            <table cellSpacing={0} cellPadding={0} className="flat">
+                                                            <table cellSpacing={0} cellPadding={0} style={{ width: '100%' }}>
                                                                 <tbody>
                                                                     <tr>
                                                                         <td><p>Nama</p></td>
@@ -657,27 +655,33 @@ class Pernyataan extends Component {
                                                                     <tr>
                                                                         <td><p>Alamat</p></td>
                                                                         <td><p>: </p></td>
-                                                                        <td><p><strong>
-                                        <div
-                                          dangerouslySetInnerHTML={{
-                                            __html: profile_perusahaan.alamat,
-                                          }}
-                                        />
-                                      </strong></p></td>
+                                                                        <td>
+                                                                            <p>
+                                                                                <strong>
+                                                                                    <div
+                                                                                    dangerouslySetInnerHTML={{
+                                                                                        __html: profile_perusahaan.alamat,
+                                                                                    }}
+                                                                                    />
+                                                                                </strong>
+                                                                            </p>
+                                                                        </td>
                                                                     </tr>
-                                                                    {dataBankPerusahaan
-                                    ? dataBankPerusahaan.map(function (bp) {
-                                        return (
-                                          <Pernyataan3
-                                            namaBank={bp.nama_bank}
-                                            atasNama={bp.atas_nama}
-                                            cabang={bp.cabang}
-                                            noRek={bp.no_rek}
-                                            noRekUSD={bp.no_rek_usd}
-                                          />
-                                        );
-                                      })
-                                    : ""}
+                                                                    <tr>
+                                                                        {dataBankPerusahaan
+                                                                        ? dataBankPerusahaan.map(function (bp) {
+                                                                                return (
+                                                                                <Pernyataan3
+                                                                                    namaBank={bp.nama_bank}
+                                                                                    atasNama={bp.atas_nama}
+                                                                                    cabang={bp.cabang}
+                                                                                    noRek={bp.no_rek}
+                                                                                    noRekUSD={bp.no_rek_usd}
+                                                                                />
+                                                                                );
+                                                                            })
+                                                                            : ""}
+                                                                    </tr>                   
                                                                 </tbody>
                                                             </table>
                                                             <b>dan dianggap sudah diterima oleh Pialang Berjangka apabila sudah ada tanda terima bukti setor atau transfer dari pegawai Pialang Berjangka.</b><br /><br />
@@ -787,7 +791,7 @@ class Pernyataan extends Component {
                                                                     onChange={this.handleChange.bind(this)}
                                                                     as="select">
                                                                     <option value="">Pilih</option>
-                                                                    <option value="Jakarta BahasaPenyelesaian PerselisihanSelatan">Jakarta Selatan</option>
+                                                                    <option value="Jakarta Selatan">Jakarta Selatan</option>
                                                                     
                                                                 </Form.Control>
 																{errMsg1.pernyataan3 ? (<span className="text-error badge badge-danger">{errMsg1.pernyataan3}</span>) : ''}

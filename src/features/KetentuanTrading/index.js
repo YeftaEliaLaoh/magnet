@@ -43,10 +43,12 @@ class KetentuanTrading extends Component {
     }
 
     handleSubmitAll(evt) {
-        var errors = this.state.errMsg;
+        var errors = {
+            agree: "",
+          };
         errors.agree = this.props.dataKetentuanTrading.agree != 'Y' ? "Kolom ini harus diisi" : '';
         this.setState({ errors });
-        if (this.validateForm(this.state.errMsg)) {
+        if (this.validateForm(errors)) {
             this.props.saveDataKT(this.props.dataKetentuanTrading);
             this.props.history.push(evt);
         } else {
@@ -82,12 +84,7 @@ class KetentuanTrading extends Component {
                                     lastSegmentUrl === "personal" ? "active default flex-1 p-3" : "default flex-1 p-3"
                                 }
                             >
-                                 <a href="#"
-                                onClick={this.handleSubmitAll.bind(
-                                    this,
-                                    '/personal'
-                                )}
-                                > 1. Informasi Pribadi</a>
+                                 <a href="personal"> 1. Informasi Pribadi</a>
                             </li>
                             <li
                                 className={
@@ -96,12 +93,7 @@ class KetentuanTrading extends Component {
                                         : "default flex-1 p-3"
                                 }
                             >
-                                <a href="#"
-                                onClick={this.handleSubmitAll.bind(
-                                    this,
-                                    '/account-type'
-                                )}
-                                > 2. Tipe Akun</a>
+                                <a href="/account-type"> 2. Tipe Akun</a>
                             </li>
                             <li
                                 className={
@@ -110,12 +102,9 @@ class KetentuanTrading extends Component {
                                         : "default flex-1 p-3"
                                 }
                             >
-                                <a href="#"
-                                onClick={this.handleSubmitAll.bind(
-                                    this,
-                                    "/decleratione"
-                                )}
-                                >3. Pernyataan</a>
+                                <a href="decleration">
+                                    3. Pernyataan
+                                </a>
                             </li>
                             <li
                                 className={

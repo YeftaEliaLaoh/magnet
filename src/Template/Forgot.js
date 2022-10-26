@@ -100,7 +100,7 @@ const Forgot = () => {
                             <div className="card border-white">
                                 <div className="card-header text-center h1 text-red-500 text-lg bg-white border-white grid grid-cols-1 place-items-center lg:mt-4">
                                     <div class="grid grid-cols-1 place-items-center">
-                                        <img src={logoa} width="60%" />
+                                        <img src={logoa} width="300px" />
                                     </div>
                                     <div><b><span className="text-merah-button font-bold text-lg">Lupa Password</span></b></div>
                                 </div>

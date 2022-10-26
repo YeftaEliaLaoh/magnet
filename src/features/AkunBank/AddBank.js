@@ -14,6 +14,7 @@ import {
 } from "../Personal/personalSlice";
 
 class AddBank extends Component {
+
   constructor(props) {
     super(props);
     this.initSelected = {
@@ -36,6 +37,7 @@ class AddBank extends Component {
       limit: 10,
       search: "",
     };
+
   }
 
   componentDidMount = async () => {
@@ -46,6 +48,7 @@ class AddBank extends Component {
   };
 
   handleSubmit6 = async (action) => {
+    this.isLoading = true  
     var errors = this.state.errMsg6;
     var nama_pemilik =
       this.props.user.nama_depan + " " + this.props.user.nama_belakang;
@@ -69,7 +72,8 @@ class AddBank extends Component {
     errors.jenis_akun_bank = !this.props.dataAkunBank.jenis_akun_bank
       ? "Kolom ini harus diisi"
       : "";
-	errors.file = !this.props.dataAkunBank.file
+    console.log(this.props.dataAkunBank.file)
+	  errors.file = !this.props.dataAkunBank.file
       ? "Kolom ini harus diisi"
       : "";
     errors.agreement6 =
@@ -100,7 +104,7 @@ class AddBank extends Component {
           this.props.user.nama_depan + " " + this.props.user.nama_belakang,
         agree: "Y",
         agreement6: "Y",
-		file: this.props.dataAkunBank.file
+		    file: this.props.dataAkunBank.file
           ? this.props.dataAkunBank.file
           : "",
       };
@@ -151,7 +155,7 @@ class AddBank extends Component {
   }
 
   render() {
-    const { user, dataAkunBank, dataBank } = this.props;
+    const { user, dataAkunBank, dataBank, isLoading } = this.props;
     const { errMsg6 } = this.state;
     return (
       <div className="content-wrapper pr-1">
@@ -565,6 +569,7 @@ class AddBank extends Component {
                                           type="button"
                                           size="lg"
                                           theme=""
+                                          isLoading={isLoading}
                                           style={{
                                             backgroundColor: "#28a745",
                                             color: "#fff",

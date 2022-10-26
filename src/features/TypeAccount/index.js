@@ -182,7 +182,7 @@ class TypeAccount extends Component {
                                                                 bg="light">
                                                                 <Card.Header><strong>{dta.nama_tipe_akun}</strong></Card.Header>
 
-                                                                <ListGroup variant="flush">
+                                                                <ListGroup>
                                                                     <ListGroup.Item>Deposit Minimum <span className="pull-right"> {dta.deposit} </span> </ListGroup.Item>
                                                                     <ListGroup.Item>Leverage  <span className="pull-right"> {dta.leverage}</span></ListGroup.Item>
                                                                     <ListGroup.Item>Komisi <span className="pull-right"> {dta.komisi}</span></ListGroup.Item>

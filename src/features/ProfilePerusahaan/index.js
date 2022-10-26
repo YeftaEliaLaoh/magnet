@@ -76,13 +76,15 @@ class ProfilePerusahaan extends Component {
   }
 
   handleSubmitAll(evt) {
-    var errors = this.state.errMsg1;
+    var errors = {
+      agree1: "",
+    };
     errors.agree1 =
       this.props.persetujuan.agree1 === "N" || !this.props.persetujuan.agree1
         ? "Kolom ini harus diisi"
         : "";
     this.setState({ errors });
-    if (this.validateForm(this.state.errMsg1)) {
+    if (this.validateForm(errors)) {
       const qs = {
         ...this.state,
         ...this.props.persetujuan,
@@ -121,62 +123,44 @@ class ProfilePerusahaan extends Component {
         <div className="content-area__edge">
           <div className="px-3">
             <ul className="list-unstyled list-steps mb-0 flex flex-col lg:flex-row gap-3">
-              <li
-                className={
-                  lastSegmentUrl === "personal"
-                    ? "active default flex-1 p-3"
-                    : "default flex-1 p-3"
-                }
-              >
-                 <a href="#"
-                                onClick={this.handleSubmitAll.bind(
-                                    this,
-                                    '/personal'
-                                )}
-                                > 1. Informasi Pribadi</a>
-              </li>
-              <li
-                className={
-                  lastSegmentUrl === "account-type"
-                    ? "active default flex-1 p-3"
-                    : "default flex-1 p-3"
-                }
-              >
-                <a href="#"
-                                onClick={this.handleSubmitAll.bind(
-                                    this,
-                                    '/account-type'
-                                )}
-                                > 2. Tipe Akun</a>
-              </li>
-              <li
-                className={
-                  lastSegmentUrl === "decleration"
-                    ? "active default flex-1 p-3"
-                    : "default flex-1 p-3"
-                }
-              >
-                <a href="#"
-                                onClick={this.handleSubmitAll.bind(
-                                    this,
-                                    "/decleratione"
-                                )}
-                                >3. Pernyataan</a>
-              </li>
-              <li
-                className={
-                  lastSegmentUrl === "trading_rules"
-                    ? "active default flex-1 p-3"
-                    : "default flex-1 p-3"
-                }
-              >
-                <a href="#"
-                  onClick={this.handleSubmitAll.bind(
-                    this,
-                    "/trading_rules"
-                  )}
-                 >4. Peraturan Trading</a>
-              </li>
+            <li
+                                className={
+                                    lastSegmentUrl === "personal" ? "active default flex-1 p-3" : "default flex-1 p-3"
+                                }
+                            >
+                                 <a href="personal"> 1. Informasi Pribadi</a>
+                            </li>
+                            <li
+                                className={
+                                    lastSegmentUrl === "account-type"
+                                        ? "active default flex-1 p-3"
+                                        : "default flex-1 p-3"
+                                }
+                            >
+                                <a href="/account-type"> 2. Tipe Akun</a>
+                            </li>
+                            <li
+                                className={
+                                    lastSegmentUrl === "decleration"
+                                        ? "active default flex-1 p-3"
+                                        : "default flex-1 p-3"
+                                }
+                            >
+                                <a href="decleration">
+                                    3. Pernyataan
+                                </a>
+                            </li>
+                            <li
+                                className={
+                                    lastSegmentUrl === "trading_rules"
+                                        ? "active default flex-1 p-3"
+                                        : "default flex-1 p-3"
+                                }
+                            >
+                                <a href="trading_rules">
+                                    4. Peraturan Trading
+                                </a>
+                            </li>
               <li
                 className={
                   lastSegmentUrl === "company_profile"
