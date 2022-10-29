@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
-import { Container, Content } from 'rsuite'
+import { Container } from 'rsuite'
 import { connect } from 'react-redux';
 import {  fetchUserBytoken } from '../features/main/mainSlice'
 import photo_ktp from "../assets/ktp-01.png";
-
-const tokenLogin = process.env.REACT_APP_TOKEN_LOGIN;
 
 class PopUp extends Component {
     constructor(props) {

@@ -1,12 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Login, Main, PageLoading, Register, Forgot, Reset, PopUp } from './Template';
+import { Login, Main, PageLoading, Register, Forgot, Reset, PopUp, Verification } from './Template';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ProtectedRoute from './router/ProtectedRoute';
 import PublicRoute from './router/PublicRoute';
-
 
 const Home = React.lazy(() => import('./features/Beranda'));
 const Personal = React.lazy(() => import('./features/Personal'));
@@ -35,6 +34,7 @@ function App({ main }) {
     <div className="App">
       <Router basename={getBasename(window.location.pathname)}>
         <Switch>
+          <Route exact path="/verification" component={Verification} />
           <PublicRoute exact path="/login">
             <Login />
           </PublicRoute>
@@ -75,7 +75,7 @@ function App({ main }) {
                 <Route exact path="/add-bank-accounts" component={AddBank} />
                 <Route exact path="/internal-transfer" component={Transfer} />
                 <Route exact path="/education" component={YukBelajar} />
-				 <Route exact path="/detail-artikel" component={DetailEduc} />
+				        <Route exact path="/detail-artikel" component={DetailEduc} />
               </React.Suspense>
             </Main>
           </ProtectedRoute>

@@ -117,6 +117,46 @@ export const fetchUserBytoken = createAsyncThunk(
   }
 );
 
+export const verifikasiTokenLogin = createAsyncThunk(
+  "users/verifikasiTokenLogin",
+  async (param, thunkAPI) => {
+    let API_URL2 = API_URL.replace("/api", "");
+
+    const token = localStorage.getItem(tokenLogin)
+      ? "Bearer " + localStorage.getItem(tokenLogin)
+      : "";
+    var config = {
+      method: "get",
+      url: API_URL2 + "/verifikasi-token-login/"+param,
+      headers: {
+        "x-app-origin": "cabinet-app",
+        Authorization: token,
+      },
+    };
+    console.log(config)
+    return axios(config)
+      .then(function (response) {
+        const _data = JSON.stringify(response);
+        if (response.status === 200) {
+          let data = response.data;
+          if (data.error_message === 0) {
+            console.log(data)
+            return data;
+          } else {
+            console.log(data)
+            return thunkAPI.rejectWithValue(data);
+          }
+        } else {
+          return thunkAPI.rejectWithValue(_data);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+        return thunkAPI.rejectWithValue(error);
+      });
+  }
+);
+
 export const fetchUserKTP = createAsyncThunk(
   "users/fetchUserKTP",
   async (param, thunkAPI) => {
@@ -880,6 +920,31 @@ export const mainSlice = createSlice({
       state.errorMessage = payload.message;
     },
     [loginUser.pending]: (state) => {
+      state.isFetching = true;
+    },
+    [verifikasiTokenLogin.fulfilled]: (state, { payload }) => {
+      state.isFetching = false;
+      state.toVerify = false;
+      state.isSuccess = true;
+      state.isLoggedIn = !!localStorage.getItem(tokenLogin);
+      state.token = localStorage.getItem(tokenLogin);
+      state.currentUser = payload;
+      state.myStatus = payload.myStatus;
+      state.accessTokenKu = payload.accessTokenKu;
+      state.errorMessage = "";
+      return state;
+    },
+    [verifikasiTokenLogin.rejected]: (state, { payload }) => {
+      state.toVerify = payload.toVerify;
+      state.isVerifikasi = payload.toVerify;
+      state.emailLogin = payload.email;
+      state.passLogin = payload.password;
+      state.user_id = payload.payload ? payload.payload.user_id : '';
+      state.isFetching = false;
+      state.isError = true;
+      state.errorMessage = payload.message;
+    },
+    [verifikasiTokenLogin.pending]: (state) => {
       state.isFetching = true;
     },
     [fetchUserBytoken.pending]: (state) => {

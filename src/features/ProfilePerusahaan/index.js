@@ -137,7 +137,7 @@ class ProfilePerusahaan extends Component {
                                         : "default flex-1 p-3"
                                 }
                             >
-                                <a href="/account-type"> 2. Tipe Akun</a>
+                                <a href="account-type"> 2. Tipe Akun</a>
                             </li>
                             <li
                                 className={
