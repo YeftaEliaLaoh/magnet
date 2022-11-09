@@ -923,29 +923,14 @@ export const mainSlice = createSlice({
       state.isFetching = true;
     },
     [verifikasiTokenLogin.fulfilled]: (state, { payload }) => {
-      state.isFetching = false;
-      state.toVerify = false;
       state.isSuccess = true;
-      state.isLoggedIn = !!localStorage.getItem(tokenLogin);
-      state.token = localStorage.getItem(tokenLogin);
-      state.currentUser = payload;
-      state.myStatus = payload.myStatus;
-      state.accessTokenKu = payload.accessTokenKu;
-      state.errorMessage = "";
-      return state;
     },
     [verifikasiTokenLogin.rejected]: (state, { payload }) => {
-      state.toVerify = payload.toVerify;
-      state.isVerifikasi = payload.toVerify;
-      state.emailLogin = payload.email;
-      state.passLogin = payload.password;
-      state.user_id = payload.payload ? payload.payload.user_id : '';
-      state.isFetching = false;
-      state.isError = true;
-      state.errorMessage = payload.message;
+      state.isSuccess = false;
+      console.log(payload)
     },
     [verifikasiTokenLogin.pending]: (state) => {
-      state.isFetching = true;
+      state.isSuccess = false;
     },
     [fetchUserBytoken.pending]: (state) => {
       state.isFetching = true;

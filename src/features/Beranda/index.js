@@ -261,30 +261,9 @@ class Beranda extends Component {
     const { akun_trading, akun_trading_demo, profile, profile_perusahaan } = this.props;
     const { selected, errMsg, myStatusDokumen, myStatusDokumen2 } = this.state;
     const frmUser3 = (
-        <div className="row">
-            <div className="col-sm-12">
-                  <Form.Group controlId="group">
-                    <label>Group</label>
-                      <Form.Control
-                        value="demo\mbm-elastico"
-                        autoComplete="off"
-                        size="lg"
-                        name="group"
-                        type="text"
-                        required
-                      />
-                      <label>Amount</label>
-                      <Form.Control
-                        value="10,000"
-                        autoComplete="off"
-                        size="lg"
-                        name="amount"
-                        type="text"
-                        required
-                      />
-                    </Form.Group>
-            </div>
-          </div>
+      <div id="caption" style={{paddingBottom:"20px"}}>
+      Apakah anda yakin <br/>membuat akun demo baru?
+    </div>
     );
     const frmUser = (
       <Form id="myForm">
@@ -855,7 +834,7 @@ class Beranda extends Component {
           backdrop="static"
           keyboard={false}
           title={"BUAT AKUN DEMO"}
-          titleButton="Save change"
+          titleButton="OK"
           themeButton="success"
           handleClose={this.handleClose.bind(this)}
           isLoading={

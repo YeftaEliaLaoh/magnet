@@ -34,7 +34,7 @@ function App({ main }) {
     <div className="App">
       <Router basename={getBasename(window.location.pathname)}>
         <Switch>
-          <Route exact path="/verification" component={Verification} />
+          <Route exact path="/verifikasi" component={Verification} />
           <PublicRoute exact path="/login">
             <Login />
           </PublicRoute>
