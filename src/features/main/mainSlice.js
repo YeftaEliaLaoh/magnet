@@ -121,39 +121,39 @@ export const verifikasiTokenLogin = createAsyncThunk(
   "users/verifikasiTokenLogin",
   async (param, thunkAPI) => {
     let API_URL2 = API_URL.replace("/api", "");
-
+    
     const token = localStorage.getItem(tokenLogin)
       ? "Bearer " + localStorage.getItem(tokenLogin)
       : "";
-    var config = {
-      method: "get",
-      url: API_URL2 + "/verifikasi-token-login/"+param,
+      var config = {
       headers: {
         "x-app-origin": "cabinet-app",
         Authorization: token,
       },
     };
-    console.log(config)
-    return axios(config)
-      .then(function (response) {
-        const _data = JSON.stringify(response);
-        if (response.status === 200) {
-          let data = response.data;
-          if (data.error_message === 0) {
-            console.log(data)
-            return data;
+    try {
+      const response = await axios.get(API_URL2 + "/verifikasi-token-login/"+param, config);
+      console.log(response)
+      const _data = JSON.stringify(response);
+      if (response.status === 200) {
+        let data = response.data;
+        if (data.error_message === 0) {
+          let payload = data.payload;
+          await localStorage.setItem(tokenLogin, payload.accessToken);
+          console.log(data)
+          return data;
           } else {
             console.log(data)
             return thunkAPI.rejectWithValue(data);
-          }
-        } else {
-          return thunkAPI.rejectWithValue(_data);
         }
-      })
-      .catch(function (error) {
-        console.log(error);
-        return thunkAPI.rejectWithValue(error);
-      });
+      } else {
+        console.log(response)
+        return thunkAPI.rejectWithValue(_data);
+      }
+    }catch (error) {
+      console.log(error);
+      return thunkAPI.rejectWithValue(error);
+    }
   }
 );
 
@@ -923,11 +923,20 @@ export const mainSlice = createSlice({
       state.isFetching = true;
     },
     [verifikasiTokenLogin.fulfilled]: (state, { payload }) => {
+      state.isFetching = false;
+      state.toVerify = false;
       state.isSuccess = true;
+      state.isLoggedIn = !!localStorage.getItem(tokenLogin);
+      state.token = localStorage.getItem(tokenLogin);
+      //state.currentUser = payload;
+      //state.myStatus = payload.myStatus;
+      //state.accessTokenKu = payload.accessTokenKu;
+      state.errorMessage = "";
+      return state;
     },
     [verifikasiTokenLogin.rejected]: (state, { payload }) => {
       state.isSuccess = false;
-      console.log(payload)
+      //console.log(payload)
     },
     [verifikasiTokenLogin.pending]: (state) => {
       state.isSuccess = false;
