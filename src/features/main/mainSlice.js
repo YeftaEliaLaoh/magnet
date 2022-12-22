@@ -62,7 +62,9 @@ export const loginUser = createAsyncThunk(
               ...data,
               ...param,
               toVerify: false,
+              myStatus : true,
             };
+            return data;
           }
           return thunkAPI.rejectWithValue(data);
         }
@@ -905,7 +907,8 @@ export const mainSlice = createSlice({
       state.currentUser = payload;
       state.myStatus = payload.myStatus;
       state.accessTokenKu = payload.accessTokenKu;
-      state.errorMessage = "";
+      state.errorMessage = payload.error_message;
+      state.message = payload.message;
       return state;
     },
     [loginUser.rejected]: (state, { payload }) => {
@@ -917,7 +920,8 @@ export const mainSlice = createSlice({
       state.user_id = payload.payload ? payload.payload.user_id : '';
       state.isFetching = false;
       state.isError = true;
-      state.errorMessage = payload.message;
+      state.errorMessage = payload.error_message;
+      state.message = payload.message;
     },
     [loginUser.pending]: (state) => {
       state.isFetching = true;

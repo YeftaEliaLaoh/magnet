@@ -3,7 +3,7 @@ import { Form } from "react-bootstrap";
 import { connect } from "react-redux";
 import AppButton from "../../components/button/Button";
 import {
-  getDataPP,
+  getDataPPNonApi,
   action_contact_us,
   closeForm,
 } from "../ProfilePerusahaan/ppSlice";
@@ -329,7 +329,7 @@ const mapDispatchToPros = (dispatch) => {
   return {
     onLoad: () => {
       dispatch(profileUser());
-      dispatch(getDataPP());
+      dispatch(getDataPPNonApi());
     },
     onSubmit: (param) => {
       dispatch(profileUser());

@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const API_URL = process.env.REACT_APP_URL_API;
+const NON_API_URL = process.env.REACT_APP_URL_NON_API;
 const tokenLogin = process.env.REACT_APP_TOKEN_LOGIN;
 // const token = localStorage.getItem(tokenLogin) ? "Bearer " + localStorage.getItem(tokenLogin) : "";
 
@@ -42,6 +43,43 @@ export const getDataPP = createAsyncThunk(
                                 agree2: '',
                             }
                         } */
+            return payload;
+          } else {
+            return thunkAPI.rejectWithValue(data);
+          }
+        } else {
+          return thunkAPI.rejectWithValue(_data);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+        return thunkAPI.rejectWithValue(error);
+      });
+  }
+);
+
+export const getDataPPNonApi = createAsyncThunk(
+  "companyProfile/getPPNonApi",
+  async (param, thunkAPI) => {
+    const token = localStorage.getItem(tokenLogin)
+      ? "Bearer " + localStorage.getItem(tokenLogin)
+      : "";
+    var config = {
+      method: "get",
+      url: NON_API_URL + "/profile_perusahaan",
+      headers: {
+        "x-app-origin": "cabinet-app",
+        Authorization: token,
+      },
+    };
+    return axios(config)
+      .then(function (response) {
+        const _data = JSON.stringify(response);
+        if (response.status === 200) {
+          //console.log(response);
+          let data = response.data;
+          if (data.error_message === 0) {
+            let payload = data.payload;
             return payload;
           } else {
             return thunkAPI.rejectWithValue(data);
@@ -200,6 +238,30 @@ export const ppSlice = createSlice({
       state.errorMessage = payload.message;
     },
     [getDataPP.pending]: (state) => {
+      state.isFetching = true;
+      state.wakil_pialang = [];
+    },
+    [getDataPPNonApi.fulfilled]: (state, { payload }) => {
+      state.isFetching = false;
+      //console.log(payload);
+      state.wakil_pialang = payload.wakil_pialang;
+      state.persetujuan = payload.persetujuan
+        ? payload.persetujuan
+        : { agree1: "", agree2: "", data_profile_perusahaan_id: "" };
+      state.akun_terpisah = payload.akun_terpisah;
+      state.susunan_pengurus = payload.susunan_pengurus;
+      state.susunan_saham = payload.susunan_saham;
+      state.legalitas_perusahaan = payload.legalitas_perusahaan;
+      state.profile_perusahaan = payload.profile_perusahaan;
+      return state;
+    },
+    [getDataPPNonApi.rejected]: (state, { payload }) => {
+      //console.log('payload', payload);
+      state.isFetching = false;
+      state.isError = true;
+      state.errorMessage = payload.message;
+    },
+    [getDataPPNonApi.pending]: (state) => {
       state.isFetching = true;
       state.wakil_pialang = [];
     },

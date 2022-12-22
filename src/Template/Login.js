@@ -19,15 +19,19 @@ import AppModalLoading from "../components/modal/MyModalLoading";
 
 const Login = () => {
   const [showModalDialog, setShowModalDialog] = useState(false);
-  const { isFetching, isSuccess, errorMessage, myStatus, accessTokenKu, toVerify } =
+  const { isFetching, isSuccess, message, errorMessage, myStatus, accessTokenKu, toVerify } =
     useSelector(userSelector);
   const history = useHistory();
   const dispatch = useDispatch();
   
+  const [v, setV] = useState("Akun Anda sudah tidak dapat digunakan. Untuk bantuan lebih lanjut Anda bisa menghubungi kami di <a href=\"https://www.magnetfx.co.id/contact\" style=\"color: rgb(220, 53, 69);\">sini</a>");
 
   useEffect(() => {
 	  
     if (myStatus) {
+      console.log(errorMessage);
+      if (errorMessage !==0) 
+      setV(message);
       setShowModalDialog(true);
     }
     if (isSuccess && !myStatus) {
@@ -63,7 +67,7 @@ const Login = () => {
     <div      
       dangerouslySetInnerHTML={{
         __html:
-          '<div id="caption" style=padding-bottom:20px;">Akun Anda sudah tidak dapat digunakan. Untuk bantuan lebih lanjut Anda bisa menghubungi kami di <a href="https://www.magnetfx.co.id/contact" style="color: rgb(220, 53, 69);">sini</a></div>',
+          '<div id="caption" style=padding-bottom:20px;"> '+v+' </div>',
       }}
     />
   );
@@ -88,7 +92,7 @@ const Login = () => {
                   </div>
                 </div>
                 <div className="card-body">
-                  {errorMessage ? (
+                  {/* {errorMessage ? (
                     <div className="alert alert-sm" style={{backgroundColor:"#C2262C"}}>
                       <button
                         onClick={hideAlert}
@@ -106,7 +110,7 @@ const Login = () => {
                     </div>
                   ) : (
                     <p className="login-box-msg"></p>
-                  )}
+                  )} */}
 
                   <form onSubmit={formik.handleSubmit}>
                     {formik.touched.email && formik.errors.email ? (
