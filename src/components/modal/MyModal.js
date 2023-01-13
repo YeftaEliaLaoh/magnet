@@ -22,7 +22,10 @@ export const AppModal = ({
     return (
         // eslint-disable-next-line react/button-has-type
         <Modal
-            style={{ overflowY: 'auto' }}
+           // style={{ overflowY: 'auto' }}
+           style={{display: 'grid', alignItems:'center' }}
+
+            size="lg"
             {...otherProps}
             open={show}
             onClose={handleClose}
