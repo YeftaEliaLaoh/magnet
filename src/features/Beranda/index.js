@@ -265,6 +265,13 @@ class Beranda extends Component {
       Apakah anda yakin <br/>membuat akun demo baru?
     </div>
     );
+    const dollar = (number)=>{
+      return new Intl.NumberFormat("en-EN", {
+        style: "currency",
+        currency: "USD"
+      }).format(number);
+    }
+  
     const frmUser = (
       <Form id="myForm">
         <Form.Group controlId="password">
@@ -450,28 +457,12 @@ class Beranda extends Component {
                                 <div className="font-bold">BALANCE</div>
                                 <div className="font-bold">FREE MARGIN</div>
                                 
-                                <div><NumberFormat
-                                  value={at.balance > 0 ? at.balance : '0.00'}
-                                  thousandSeparator={true}
-                                  decimalScale={2}
-                                  displayType={'text'}
-                                /></div>
-
-                                <div><NumberFormat
-                                  value={at.margin_free > 0 ? at.margin_free : '0.00'}
-                                  thousandSeparator={true}
-                                  decimalScale={2}
-                                  displayType={'text'}
-                                /></div>
+                                <div>{dollar(at.balance).replace('$', '')}</div>
+                                <div>{dollar(at.margin_free).replace('$', '')}</div>
 
                                 <div className="font-bold">EQUITY</div>
                                 <div>&nbsp;</div>
-                                <div><NumberFormat
-                                  value={at.equity > 0 ? at.equity : '0.00'}
-                                  thousandSeparator={true}
-                                  decimalScale={2}
-                                  displayType={'text'}
-                                /></div>
+                                <div>{dollar(at.equity).replace('$', '')}</div>
                               </div>
 
                             </div>
@@ -552,28 +543,13 @@ class Beranda extends Component {
                                 <div className="font-bold">BALANCE</div>
                                 <div className="font-bold">FREE MARGIN</div>
                                 
-                                <div><NumberFormat
-                                  value={at.balance > 0 ? at.balance : '0.00'}
-                                  thousandSeparator={true}
-                                  decimalScale={2}
-                                  displayType={'text'}
-                                /></div>
+                                <div>{dollar(at.balance).replace('$', '')}</div>
 
-                                <div><NumberFormat
-                                  value={at.margin_free > 0 ? at.margin_free : '0.00'}
-                                  thousandSeparator={true}
-                                  decimalScale={2}
-                                  displayType={'text'}
-                                /></div>
+                                <div>{dollar(at.margin_free).replace('$', '')}</div>
 
                                 <div className="font-bold">EQUITY</div>
                                 <div>&nbsp;</div>
-                                <div><NumberFormat
-                                  value={at.equity > 0 ? at.equity : '0.00'}
-                                  thousandSeparator={true}
-                                  decimalScale={2}
-                                  displayType={'text'}
-                                /></div>
+                                <div>{dollar(at.equity).replace('$', '')}</div>
                               </div>
 
                             </div>

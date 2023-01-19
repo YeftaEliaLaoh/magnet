@@ -647,13 +647,13 @@ class Pernyataan extends Component {
                                                             <p>(2) Semua uang harus disetor atau ditransfer langsung oleh Nasabah ke Rekening Terpisah <i>(Segregated Account)</i>Pialang Berjangka: </p>
                                                             <table cellSpacing={0} cellPadding={0} style={{ width: '100%' }}>
                                                                 <tbody>
-                                                                    <tr>
-                                                                        <td><p>Nama</p></td>
-                                                                        <td style={{ width: 50 }}><p>: </p></td>
+                                                                <tr><tr>
+                                                                        <td style={{ width: 100 }}><p>Nama</p></td>
+                                                                        <td><p>: </p></td>
                                                                         <td><p><b>{profile_perusahaan.perusahaan}</b></p></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td><p>Alamat</p></td>
+                                                                        </tr> </tr>
+                                                                    <tr><tr>
+                                                                        <td style={{ width: 100 }}><p>Alamat</p></td>
                                                                         <td><p>: </p></td>
                                                                         <td>
                                                                             <p>
@@ -665,7 +665,7 @@ class Pernyataan extends Component {
                                                                                     />
                                                                                 </strong>
                                                                             </p>
-                                                                        </td>
+                                                                        </td></tr>
                                                                     </tr>
                                                                     <tr>
                                                                         {dataBankPerusahaan
