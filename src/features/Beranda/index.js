@@ -31,6 +31,8 @@ class Beranda extends Component {
     };
     this.state = {
       selected: this.initSelected,
+      scsMsg: false,
+      titleMsg: "", 
       errMsg: this.initSelected,
       showFormResPass: false,
       showFormResPhonePass: false,
@@ -45,6 +47,16 @@ class Beranda extends Component {
 
   componentDidMount() {
     //await this.sleep(300);
+    const location = window.location.href;
+    const baseName = location.substring(location.lastIndexOf("?") + 1);
+    const myArray = baseName.split("=");
+    console.log(myArray[1])
+    if(myArray[1]==="sukses"){
+      this.setState({
+        scsMsg : true,
+        titleMsg :"withdraw success"
+      })
+    }
     sessionStorage.removeItem("data_tipe_akun_id");
     sessionStorage.removeItem("act_tipe_akun_id");
     this.props.onLoad();
@@ -238,6 +250,13 @@ class Beranda extends Component {
   handleCloseSwalAccountDemo() {
     window.location.reload(); 
   }
+
+  handleCloseSwalSukses() {
+    this.props.history.push("/");
+    this.setState({
+      scsMsg : false
+    })
+  }
   
   handleClose2() {
     localStorage.removeItem("myStatusDokumen2");
@@ -259,7 +278,7 @@ class Beranda extends Component {
 
   render() {
     const { akun_trading, akun_trading_demo, profile, profile_perusahaan } = this.props;
-    const { selected, errMsg, myStatusDokumen, myStatusDokumen2 } = this.state;
+    const { selected,scsMsg, errMsg, titleMsg, myStatusDokumen, myStatusDokumen2 } = this.state;
     const frmUser3 = (
       <div id="caption" style={{paddingBottom:"20px"}}>
       Apakah anda yakin <br/>membuat akun demo baru?
@@ -857,6 +876,13 @@ class Beranda extends Component {
           title={<div dangerouslySetInnerHTML={{ __html: this.props.contentMsg }} />}
           type={this.props.tipeSWAL}
           handleClose={this.handleCloseSwalAccountDemo.bind(this)}
+        >
+        </AppSwalSuccess>) : ''}
+        {scsMsg ? (<AppSwalSuccess
+          show={scsMsg}
+          title={<div dangerouslySetInnerHTML={{ __html: titleMsg }} />}
+          type={this.props.tipeSWAL}
+          handleClose={this.handleCloseSwalSukses.bind(this)}
         >
         </AppSwalSuccess>) : ''}
       </div>
