@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Login, Main, PageLoading, Register, Forgot, Reset, PopUp, Verification } from './Template';
+import { Login, Main, PageLoading, Register, Forgot, Reset, PopUp, Verification, UnVerified } from './Template';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ProtectedRoute from './router/ProtectedRoute';
@@ -35,6 +35,7 @@ function App({ main }) {
       <Router basename={getBasename(window.location.pathname)}>
         <Switch>
           <Route exact path="/verifikasi" component={Verification} />
+          <Route exact path="/unverified" component={UnVerified} />
           <PublicRoute exact path="/login">
             <Login />
           </PublicRoute>
