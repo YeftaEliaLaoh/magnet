@@ -35,7 +35,6 @@ function App({ main }) {
       <Router basename={getBasename(window.location.pathname)}>
         <Switch>
           <Route exact path="/verifikasi" component={Verification} />
-          <Route exact path="/unverified" component={UnVerified} />
           <PublicRoute exact path="/login">
             <Login />
           </PublicRoute>
@@ -55,6 +54,14 @@ function App({ main }) {
           <ProtectedRoute exact path="/popup">
             <PopUp />
           </ProtectedRoute>
+
+          <PublicRoute path="/">
+            <Main>
+              <React.Suspense fallback={<PageLoading />}>
+                <Route exact path="/unverified" component={UnVerified} />
+                </React.Suspense>
+            </Main>
+          </PublicRoute>
 
           <ProtectedRoute path="/">
             <Main>
