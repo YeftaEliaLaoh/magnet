@@ -55,7 +55,7 @@ function App({ main }) {
             <PopUp />
           </ProtectedRoute>
 
-          <PublicRoute path="/">
+          <PublicRoute path="/unverified">
             <Main>
               <React.Suspense fallback={<PageLoading />}>
                 <Route exact path="/unverified" component={UnVerified} />
