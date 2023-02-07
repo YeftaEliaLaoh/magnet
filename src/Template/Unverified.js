@@ -26,12 +26,13 @@ handleClose() {
 
   render() {     
     const { profile } = this.props;
+    const nama_depan = profile.nama_depan===undefined ? "," : ", "+profile.nama_depan
 
     const contentDelete2 = (
       <div
         dangerouslySetInnerHTML={{
           __html:
-            '<div id="caption" style="padding-bottom:20px; text-align:left;">Hi '+profile.nama_depan+', selamat datang di Magnet, kami sangat senang kamu bergabung bersama kami, agar bisa menggunakan cabinet silahkan lengkapi verifikasi akun kamu. Silahkan cek email kamu untuk melakukan verifikasi.</div>',
+            '<div id="caption" style="padding-bottom:20px; text-align:left;">Hi'+ nama_depan +' selamat datang di Magnet, kami sangat senang kamu bergabung bersama kami, agar bisa menggunakan cabinet silahkan lengkapi verifikasi akun kamu. Silahkan cek email kamu untuk melakukan verifikasi.</div>',
         }}
       />
     );
