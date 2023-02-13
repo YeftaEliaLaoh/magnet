@@ -174,7 +174,7 @@ const Forgot = () => {
                                             <ReCAPTCHA
                                                 hl="id"
                                                 ref={recaptchaRef}
-                                                sitekey="6LfEKfEcAAAAAGH6QCdvmj3wSSzFSyw0dbIoSmpK"
+                                                sitekey="6LfuzEEkAAAAAIg19QrJ7P8Knk5RvDvTV7OJpuEN"
                                                 onChange={handleChangeCaptcha}
                                                 onExpired={handleExpired}
                                             />
