@@ -936,7 +936,7 @@ class Setoran extends Component {
                                         size="lg"
                                         theme=""
                                       >
-                                        Setor Melalui Bank {dp.nama_bank}
+                                        Setor Melalui {dp.nama_bank}
                                       </AppButton>
                                     </div>
 

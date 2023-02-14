@@ -493,7 +493,7 @@ class Personal extends Component {
                                                 onSelect={this.handleSelect.bind(this)}
                                                 active={active_tab === 'detil_pribadi' ? true : false}
                                                 eventKey="detil_pribadi"
-                                                className="default border   border-white" >Detil Pribadi
+                                                className="default border   border-white" >Detail Pribadi
                                             </Nav.Item>
                                             <Nav.Item
                                                 eventKey="exp_trading"
@@ -537,7 +537,7 @@ class Personal extends Component {
                                             <Form>
                                                 <div style={{ paddingLeft: 20, paddingRight: 20 }}>
                                                     <br />
-                                                    <h3>Detil Pribadi</h3>
+                                                    <h3>Detail Pribadi</h3>
                                                     <br />
                                                     <Form.Row>
                                                         <Form.Group as={Col} controlId="nama_depan">

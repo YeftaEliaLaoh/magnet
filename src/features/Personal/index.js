@@ -1411,7 +1411,7 @@ if (visible.length > 0) {
                         eventKey="detil_pribadi"
                         className="default border   border-white"
                       >
-                        Detil Pribadi
+                        Detail Pribadi
                       </Nav.Item>
                       <Nav.Item
                         eventKey="exp_trading"
@@ -1639,7 +1639,7 @@ if (visible.length > 0) {
                                       fontWeight: "bold",
                                     }}
                                   >
-                                    Detil Pribadi
+                                    Detail Pribadi
                                   </span>
                                 </div>
                               </div>
@@ -1655,7 +1655,7 @@ if (visible.length > 0) {
                                       fontWeight: "bold",
                                     }}
                                   >
-                                    Detil Pribadi
+                                    Detail Pribadi
                                   </span>
                                 </div>
                               </div>
