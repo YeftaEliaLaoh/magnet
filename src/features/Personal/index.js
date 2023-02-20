@@ -60,7 +60,7 @@ import "react-datetime/css/react-datetime.css";
 import AppModal from "../../components/modal/MyModal";
 import AppButton from "../../components/button/Button";
 import AppModalLoading from "../../components/modal/MyModalLoading";
-var yesterday = moment().subtract(40, "years");
+var yesterday = moment().subtract(100, "years");
 var valid_startDate = function (current) {
   return current.isAfter(yesterday);
 };
