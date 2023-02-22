@@ -17,7 +17,8 @@ class Verification extends Component {
 
     console.log(baseName)
     this.props.onLoad(baseName)
-    setTimeout(() => { this.checkData(); }, 2000);
+    this.checkData();
+    //setTimeout(() => { this.checkData(); }, 2000);
   }
 
   checkData(){
@@ -31,6 +32,7 @@ class Verification extends Component {
         this.props.history.push('register')
     } catch(e){
       console.log(e)
+      this.checkData();
     }
 }
 

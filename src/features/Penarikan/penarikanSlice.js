@@ -273,7 +273,7 @@ export const penarikanSlice = createSlice({
         },
         [actionPenarikan.fulfilled]: (state, { payload }) => {
             state.showFormSuccess = true;
-            state.contentMsg = "<div style='font-size:20px; text-align:center; line-height:23px;'><strong>Terima kasih</strong><br/> Permintaan penarikan dana kamu telah terkirim, tim kami akan segera memproses permintaan kamu</div>";
+            state.contentMsg = "<div style='font-size:20px; text-align:center; line-height:23px;'><strong>Satu langkah lagi !</strong><br/> Kami telah mengirimkan email konfirmasi withdrawal ke alamat email terdaftar kamu, segera buka dan klik tombol konfirmasi di email tersebut</div>";
             state.tipeSWAL = "success";
             state.isFetching = false;
             state.errorMessage = payload.message;
