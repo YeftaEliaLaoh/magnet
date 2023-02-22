@@ -145,7 +145,7 @@ class Unduh extends Component {
 
                             <div className="w-full mt-5 flex flex-row items-center">
                               <a
-                                href="https://download.mql5.com/cdn/mobile/mt5/ios?server=MagnetBerjangka-DEMO,MagnetBerjangka-REAL"
+                                href="https://apps.apple.com/us/app/magnet-fx-trader/id6443754964"
                                 target="_new"
                               >
                                 <img
