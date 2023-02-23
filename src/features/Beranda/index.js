@@ -60,6 +60,8 @@ class Beranda extends Component {
     sessionStorage.removeItem("data_tipe_akun_id");
     sessionStorage.removeItem("act_tipe_akun_id");
     this.props.onLoad();
+    if(this.state.myStatusDokumen2)
+      this.props.history.push("/rej-doc");
   }
 
   sleep(ms) {
