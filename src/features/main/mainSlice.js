@@ -16,6 +16,7 @@ export const loginUser = createAsyncThunk(
     };
     try {
       const response = await axios.post(API_URL + "/login", param, config);
+      await localStorage.setItem("myStatusDokumen2", "false");
       let data = "";
       let _data = await response;
       if (response.status === 200) {
@@ -26,11 +27,12 @@ export const loginUser = createAsyncThunk(
           let status_Dokumen = payload.status_dokumen;
           let myStatus = false;
           let accessToken = "";
+          console.log(status_Dokumen);
 
           if (status_Dokumen === "Reject") {
             myStatus = false;
             await localStorage.setItem(tokenLogin, payload.accessToken);
-            await localStorage.setItem("myStatusDokumen2", true);
+            await localStorage.setItem("myStatusDokumen2", "true");
           } 
           // else if (status_Dokumen === "Belum Lengkap") {
           //   await localStorage.setItem("myStatusDokumen", true);
