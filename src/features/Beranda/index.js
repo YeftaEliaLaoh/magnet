@@ -155,6 +155,7 @@ class Beranda extends Component {
       const param = {
         login: this.state.selected.login,
         phonepwd: this.state.selected.phonepwd,
+        server: this.state.server,
       };
       this.props.onChangePhonePass(param);
     } else {
@@ -213,8 +214,9 @@ class Beranda extends Component {
     });
   }
 
-  chg_pass2(record) {
+  chg_pass2(record,reqServer) {
     this.setState({
+      server:reqServer,
       showFormResPhonePass: true,
       selected: {
         ...record,
@@ -471,7 +473,7 @@ class Beranda extends Component {
 
                                     <Dropdown.Menu className="my-dropdown-menu">
                                       <Dropdown.Item as="button" onClick={() => this.chg_pass(at,1)}>RESET PASSWORD</Dropdown.Item>
-                                      <Dropdown.Item as="button" onClick={() => this.chg_pass2(at)}>RESET PHONE PASSWORD</Dropdown.Item>
+                                      <Dropdown.Item as="button" onClick={() => this.chg_pass2(at,1)}>RESET PHONE PASSWORD</Dropdown.Item>
 
                                     </Dropdown.Menu>
                                   </Dropdown>
@@ -556,7 +558,7 @@ class Beranda extends Component {
 
                                     <Dropdown.Menu className="my-dropdown-menu">
                                       <Dropdown.Item as="button" onClick={() => this.chg_pass(at,0)}>RESET PASSWORD</Dropdown.Item>
-                                      <Dropdown.Item as="button" onClick={() => this.chg_pass2(at)}>RESET PHONE PASSWORD</Dropdown.Item>
+                                      <Dropdown.Item as="button" onClick={() => this.chg_pass2(at,0)}>RESET PHONE PASSWORD</Dropdown.Item>
 
                                     </Dropdown.Menu>
                                   </Dropdown>
@@ -640,7 +642,7 @@ class Beranda extends Component {
 
                                   <Dropdown.Menu className="my-dropdown-menu">
                                     <Dropdown.Item as="button" onClick={() => this.chg_pass(at,1)}>RESET PASSWORD</Dropdown.Item>
-                                    <Dropdown.Item as="button" onClick={() => this.chg_pass2(at)}>RESET PHONE PASSWORD</Dropdown.Item>
+                                    <Dropdown.Item as="button" onClick={() => this.chg_pass2(at,1)}>RESET PHONE PASSWORD</Dropdown.Item>
 
                                   </Dropdown.Menu>
                                 </Dropdown>
@@ -734,7 +736,7 @@ class Beranda extends Component {
 
                                 <Dropdown.Menu className="my-dropdown-menu">
                                   <Dropdown.Item as="button" onClick={() => this.chg_pass(at,0)}>RESET PASSWORD</Dropdown.Item>
-                                  <Dropdown.Item as="button" onClick={() => this.chg_pass2(at)}>RESET PHONE PASSWORD</Dropdown.Item>
+                                  <Dropdown.Item as="button" onClick={() => this.chg_pass2(at,0)}>RESET PHONE PASSWORD</Dropdown.Item>
 
                                 </Dropdown.Menu>
                               </Dropdown>
@@ -858,7 +860,7 @@ class Beranda extends Component {
           themeButton="success" />
 		  
 		  <AppModalStatus
-                    show={myStatusDokumen2}
+                    show={myStatusDokumen2==="true"}
                     size="xs"
                     form={contentDelete2}
                     handleClose={this.handleClose2.bind(this)}
